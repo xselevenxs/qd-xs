@@ -4,6 +4,11 @@
 		"style": {
 			"navigationBarTitleText": "uni-ui基础项目"
 		}
+	},{
+		"path": "pages/activity/draw",
+		"style": {
+			"navigationBarTitleText": "抽奖"
+		}
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
