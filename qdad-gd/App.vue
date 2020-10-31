@@ -5,17 +5,23 @@
 			console.log('App Launch');
 			that = this
 			//  临时修改为默认的token  >>>>>
-			var nativeTokenInfo
-			nativeTokenInfo.recordTime = Date.parse(new Date()); //记录时间
-			nativeTokenInfo.token = "aaaa"; //token的值
-			// nativeTokenInfo.appid = that.getAppId();
-			console.log("获取用户相关信息nativeTokenInfo=" + JSON.stringify(nativeTokenInfo));
-			uni.setStorage({
-				key: "nativeTokenInfo_key",
-				data: nativeTokenInfo
-			})
+			// var nativeTokenInfo
+			// nativeTokenInfo.recordTime = Date.parse(new Date()); //记录时间
+			// nativeTokenInfo.token = "aaaa"; //token的值
+			// // nativeTokenInfo.appid = that.getAppId();
+			// console.log("获取用户相关信息nativeTokenInfo=" + JSON.stringify(nativeTokenInfo));
+			// uni.setStorage({
+			// 	key: "nativeTokenInfo_key",
+			// 	data: nativeTokenInfo
+			// })
 			//  临时修改为默认的token  <<<<
-
+			return
+			var myAppId = "wx86a1e0f53265f9f7";
+			var myWeiXinHttp = "http%3A%2F%2Fxs-dev.grip8.com";
+			window.location.href =
+				"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + myAppId + "&redirect_uri=" + myWeiXinHttp +
+				"&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+				return
 			// 			判断是微信环境
 			if (that.is_weixin()) {
 				uni.getStorage({
@@ -142,6 +148,8 @@
 </script>
 
 <style>
+	@import "colorui/main.css";
+	@import "colorui/icon.css";
 	/* 解决头条小程序组件内引入字体不生效的问题 */
 	/* #ifdef MP-TOUTIAO */
 	@font-face {

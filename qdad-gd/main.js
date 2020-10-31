@@ -1,16 +1,24 @@
 import Vue from 'vue'
 import App from './App'
+import store from './store'
+import Vuex from 'vuex'
+import api from '@/common/vmeitime-http/'
+import VueJsonp from 'vue-jsonp'
+import * as util from './common/util.js'
 
 Vue.config.productionTip = false
-
+// Vue.use(VueJsonp)
 App.mpType = 'app'
 
 const app = new Vue({
+	store,
 	...App
 })
 app.$mount()
 
-
+Vue.prototype.$store = store;
+Vue.prototype.$api = api;
+Vue.prototype.$util = { ...util } // 绑定工具供全局访问
 // 显示提示信息
 Vue.prototype.showToast = function(value) {
 	uni.showToast({
@@ -41,7 +49,7 @@ Vue.prototype.showToast = function(value) {
 var http = "http://huimin-api1-dev.grip8.com";
 
 var myAppId = "wx0d277c1eaeab1102";
-var myWeiXinHttp = "http%3A%2F%2Fxyf-dev.grip8.com";
+var myWeiXinHttp = "http%3A%2F%2Fxs-dev.grip8.com";
 
 //获取APPID
 Vue.prototype.getAppId = function() {

@@ -25,6 +25,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/ans/ans",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "答题",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
