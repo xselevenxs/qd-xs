@@ -27,23 +27,20 @@
 				</view>
 			</view>
 			<view class="btnView">
-				<view class="mark">已有积分：20分</view>
+				<view class="mark">已有积分：{{userInfo.integral}}分</view>
 				<view @click="convertClick" class="convert">兑换洗车劵</view>
 				<view @click="prizeClick" class="my">我的奖品</view>
 			</view>
 			<!-- 规则 -->
-			<view class="guize" style="margin-top: 50upx;">
+			<view class="guize" style="margin-top: 10upx;">
 				<view class="title">
 					规则说明
 				</view>
 				<view class="g_item">
-					1.用户每天登录即送1次抽奖机会，分享好友则多赠1次机会
+					2.用户点击大转盘抽奖按钮，每次抽奖需20积分
 				</view>
 				<view class="g_item">
-					2.用户点击大转盘抽奖按钮，有积分和现金两种方式可参与抽奖，没抽一次消耗1次抽奖机会
-				</view>
-				<view class="g_item">
-					3.用户获得的奖品，可在我的道具里查看
+					3.用户获得的奖品，可在我的奖品里查看
 				</view>
 			</view>
 		</view>
@@ -52,7 +49,14 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex';
 	export default {
+		computed: {
+			...mapState(['userInfo'])
+		},
 		data() {
 			return {
 				list: [{
@@ -108,8 +112,11 @@
 				})
 			},
 			prizeClick() {
+				// uni.navigateTo({
+				// 	url: '../submitInfo/submitInfo'
+				// })
 				uni.navigateTo({
-					url: '../submitInfo/submitInfo'
+					url: '../myAwardList/myAwardList'
 				})
 			},
 			animation(index, duration) {
@@ -133,7 +140,7 @@
 			},
 			//发起抽奖
 			playReward() {
-				let index = 4,
+				let index = 8,
 					duration = 4000
 				this.animation(index, duration)
 
@@ -382,32 +389,33 @@
 	}
 
 	.btnView {
-		z-index: 99999;
+		z-index: 999;
 		position: relative;
-		height: 180upx;
+		height: 100upx;
 		width: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		color: #FFFFFF;
+		padding: 10upx;
 	}
 
 	.mark {
-		position: absolute;
-		left: 20upx;
 		padding: 20upx 30upx;
+		height: 80upx;
 		background-color: #0081FF;
 		border-radius: 10upx;
 	}
 
 	.convert {
-		position: absolute;
-		left: 20upx;
-		bottom: 0upx;
+		height: 80upx;
 		padding: 20upx 30upx;
 		background-color: #0081FF;
 		border-radius: 10upx;
 	}
 
 	.my {
-		position: absolute;
-		right: 20upx;
+		height: 80upx;
 		padding: 20upx 30upx;
 		background-color: #0081FF;
 		border-radius: 10upx;

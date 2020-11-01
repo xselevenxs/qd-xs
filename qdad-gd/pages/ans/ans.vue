@@ -10,7 +10,8 @@
 			</view>
 			<view class="timeCount">{{timecount}}秒</view>
 			<view class="action">
-				<button class="cu-btn bg-green shadow" @tap="showCardModal" data-target="modalCard">答题卡</button>
+				<!-- @tap="showCardModal" -->
+				<button class="cu-btn bg-green shadow"  data-target="modalCard">{{subjectIndex+1}}/10</button>
 			</view>
 		</view>
 		<view class="cu-modal" :class="modalCard=='modalCard'?'show':''" @tap="hideCardModal">
@@ -124,8 +125,13 @@
 				</swiper-item>
 			</swiper>
 		</form>
-		<view id="foot-box" class="cu-bar tabbar bg-white shadow foot">
-			<view class="action" @click="MoveSubject(-1)">
+		<view id="foot-box" class="cu-bar tabbar bg-white  foot" style="box-shadow:0px 0px 0px #FFFFFF;">
+			<view class="bottomBackview">
+				<view v-if="subjectIndex == 9" @click="answerToService" class="bottomBtn">提交</view>
+				<view v-else @click="MoveSubject(1)" class="bottomBtn">下一题</view>
+			</view>
+			
+			<!-- <view class="action" @click="MoveSubject(-1)">
 				<view class="cuIcon-cu-image">
 					<text class="lg cuIcon-back text-gray"></text>
 				</view>
@@ -156,7 +162,7 @@
 					<text class="lg text-gray cuIcon-warn"></text>
 				</view>
 				<view class="text-gray">纠错</view>
-			</view>
+			</view> -->
 
 		</view>
 
@@ -176,6 +182,7 @@
 		data() {
 			return {
 				curIntervalId: '',
+				curTimeoutId: '',
 				timecount: 10,
 				userFavor: false, //是否已收藏
 				currentType: 0, //当前题型
@@ -184,271 +191,7 @@
 				autoRadioNext: false, //判断题、单项题，自动移下一题
 				swiperHeight: '800px', //
 				title: '答题',
-				subjectList222: [{
-						"title": "水是液体？",
-						"type": 1,
-						"optionList": [{
-							"id": "A",
-							"content": "对"
-						}, {
-							"id": "B",
-							"content": "错"
-						}],
-						"answer": "A",
-						"userAnswer": "",
-						"userFavor": false,
-						"explain": "难到是固体不成？"
-					},
-					{
-						"title": "电流分有？",
-						"type": 2,
-						"optionList": [{
-							"id": "A",
-							"content": "直流"
-						}, {
-							"id": "B",
-							"content": "交流"
-						}, {
-							"id": "C",
-							"content": "直流和交流"
-						}],
-						"answer": "C",
-						"userAnswer": "",
-						"userFavor": false,
-						"explain": "科技学依据"
-					},
-					{
-						"title": "酸菜鱼的味道？",
-						"type": 3,
-						"optionList": [{
-							"id": "A",
-							"content": "咸味"
-						}, {
-							"id": "B",
-							"content": "辣味"
-						}, {
-							"id": "C",
-							"content": "甜味"
-						}, {
-							"id": "D",
-							"content": "酸味"
-						}],
-						"answer": "A,B,D",
-						"userAnswer": "",
-						"userFavor": false,
-						"explain": "你怎么想都行，要的就是这个味，答案只能选A,B,D"
-					},
-					{
-						"title": "床前（____）光，疑是地上霜。",
-						"type": 4,
-						"optionList": [{
-							"id": "",
-							"content": ""
-						}],
-						"answer": "明月",
-						"userAnswer": "",
-						"userFavor": false,
-						"explain": "问答题没有选项，无法做答，且不参与计分"
-					},
-					{
-						"title": "什么美国要限制华为？",
-						"type": 5,
-						"optionList": [{
-							"id": "",
-							"content": ""
-						}],
-						"answer": "",
-						"userAnswer": "",
-						"userFavor": false,
-						"explain": "问答题没有选项，无法做答，且不参与计分"
-					}
-				],
-				subjectList: [{
-					"title": "新建和改造的生活垃圾收集站应具备厨余垃圾和其他垃圾分类暂存及转运功能。鼓励有条件的增加可回收物和有害垃圾分类暂存及转运功能，并符合管理规范要求。（）",
-					"type": 1,
-					"answer": "A",
-					"userAnswer": null,
-					"userFavor": false,
-					"explain": null,
-					"optionList": [{
-						"id": "A",
-						"content": "正确"
-					}, {
-						"id": "B",
-						"content": "错误"
-					}]
-				}, {
-					"title": "单位和个人应当减少使用或者按照规定不使用（），优先采购（）产品。",
-					"type": 2,
-					"answer": "A",
-					"userAnswer": null,
-					"userFavor": false,
-					"explain": null,
-					"optionList": [{
-						"id": "A",
-						"content": "A、一次性用品，可重复使用和再利用"
-					}, {
-						"id": "B",
-						"content": "B、石油化工用品，纸质和纯天然"
-					}, {
-						"id": "C",
-						"content": "C、高能耗产品，低能耗"
-					}, {
-						"id": "D",
-						"content": "D、精致包装产品，简易包装"
-					}, {
-						"id": "E",
-						"content": null
-					}]
-				}, {
-					"title": "易破损或有尖锐边角的可回收物，应包裹后投放。（）",
-					"type": 1,
-					"answer": "A",
-					"userAnswer": null,
-					"userFavor": false,
-					"explain": null,
-					"optionList": [{
-						"id": "A",
-						"content": "正确"
-					}, {
-						"id": "B",
-						"content": "错误"
-					}]
-				}, {
-					"title": "有害垃圾不包括以下哪类：（）",
-					"type": 2,
-					"answer": "D",
-					"userAnswer": null,
-					"userFavor": false,
-					"explain": null,
-					"optionList": [{
-						"id": "A",
-						"content": "A废相纸类：X光片、相片底片"
-					}, {
-						"id": "B",
-						"content": "B废杀虫剂类：杀虫喷雾罐、消毒剂、老鼠药、农药及其包装物"
-					}, {
-						"id": "C",
-						"content": "C废油漆类：废油漆桶、染发剂壳、过期的指甲油、洗甲水"
-					}, {
-						"id": "D",
-						"content": "D织物：衣物、箱包、床上用品、窗帘等"
-					}, {
-						"id": "E",
-						"content": null
-					}]
-				}, {
-					"title": "公共机构办公场所应及时清运装修和大件垃圾，宜设置装修垃圾、大件垃圾等临时堆放点，临时堆放点应设置在不妨碍交通安全、便于管理的区域，面积宜不少于",
-					"type": 1,
-					"answer": "A",
-					"userAnswer": null,
-					"userFavor": false,
-					"explain": null,
-					"optionList": [{
-						"id": "A",
-						"content": "正确"
-					}, {
-						"id": "B",
-						"content": "错误"
-					}]
-				}, {
-					"title": "猪羊牛等动物大块骨头属()。",
-					"type": 2,
-					"answer": "B",
-					"userAnswer": null,
-					"userFavor": false,
-					"explain": null,
-					"optionList": [{
-						"id": "A",
-						"content": "A、厨余垃圾"
-					}, {
-						"id": "B",
-						"content": "B、其他垃圾　"
-					}, {
-						"id": "C",
-						"content": "C、可回收物"
-					}, {
-						"id": "D",
-						"content": "D、有害垃圾"
-					}, {
-						"id": "E",
-						"content": null
-					}]
-				}, {
-					"title": "家庭日常生活中打碎的陶瓷碗碟属于可回收物。（）",
-					"type": 1,
-					"answer": "B",
-					"userAnswer": null,
-					"userFavor": false,
-					"explain": null,
-					"optionList": [{
-						"id": "A",
-						"content": "正确"
-					}, {
-						"id": "B",
-						"content": "错误"
-					}]
-				}, {
-					"title": "我市生活垃圾分类工作遵循（）的原则。",
-					"type": 2,
-					"answer": "D",
-					"userAnswer": null,
-					"userFavor": false,
-					"explain": null,
-					"optionList": [{
-						"id": "A",
-						"content": "A.垃圾分类举手之劳，共建和谐美好青岛"
-					}, {
-						"id": "B",
-						"content": "B.垃圾科学分类，文明你我同行"
-					}, {
-						"id": "C",
-						"content": "C.垃圾分类人人参与，共创岛城生态文明"
-					}, {
-						"id": "D",
-						"content": "D.政府推动、全民参与、城乡统筹、系统推进"
-					}, {
-						"id": "E",
-						"content": null
-					}]
-				}, {
-					"title": "厨余垃圾不包括以下哪类：（）",
-					"type": 2,
-					"answer": "C",
-					"userAnswer": null,
-					"userFavor": false,
-					"explain": null,
-					"optionList": [{
-						"id": "A",
-						"content": "A废弃食品调料"
-					}, {
-						"id": "B",
-						"content": "B 剩菜剩饭"
-					}, {
-						"id": "C",
-						"content": "C废杀虫剂类"
-					}, {
-						"id": "D",
-						"content": "D 瓜皮果核"
-					}, {
-						"id": "E",
-						"content": null
-					}]
-				}, {
-					"title": "未采取集中收集方式的区域内，公共机构应合理设置可回收物和有害垃圾收集点，有害垃圾收集点应设置在有人看管的区域。（）",
-					"type": 1,
-					"answer": "A",
-					"userAnswer": null,
-					"userFavor": false,
-					"explain": null,
-					"optionList": [{
-						"id": "A",
-						"content": "正确"
-					}, {
-						"id": "B",
-						"content": "错误"
-					}]
-				}],
+				subjectList: [],
 				modalCard: null, //显示答题卡
 				modalError: null, //纠错卡
 				errorList: ['题目不完整', '答案不正确', '含有错别字', '图片不存在', '解析不完整', '其他错误']
@@ -492,18 +235,16 @@
 					}).exec();
 				}
 			});
-			// that.autoTimesNext()
+			that.autoTimesNext()
 		},
 		onLoad() {
 			that = this
-			console.log('**********************' + JSON.stringify(that.ansList))
-			// this.subjectList = that.ansList
-			console.log('*********************this.subjectList*' + JSON.stringify(this.subjectList))
+			this.subjectList = that.ansList
 			this.currentType = this.subjectList[0].type;
-
 
 			//添加用户显示答案字段
 			for (var i = 0; i < this.subjectList.length; i++) {
+				this.$set(this.subjectList[i], "userAnswer", '');
 				this.$set(this.subjectList[i], "showAnswer", false);
 			}
 
@@ -540,11 +281,12 @@
 
 				var items = this.subjectList[this.subjectIndex].optionList;
 				var values = e.detail.value;
+				
 				this.subjectList[this.subjectIndex].userAnswer = values;
 				if (this.autoRadioNext && this.subjectIndex < this.subjectList.length - 1) {
 					this.subjectIndex += 1;
 				};
-
+				
 			},
 			CheckboxChange: function(e) { //复选选中
 
@@ -589,28 +331,68 @@
 			},
 
 			MoveSubject: function(e) { //上一题、下一题
-
+			
+				
 				if (e === -1 && this.subjectIndex != 0) {
 					this.subjectIndex -= 1;
 				}
 				if (e === 1 && this.subjectIndex < this.subjectList.length - 1) {
-					this.subjectIndex += 1;
-
-					that.autoTimesNext()
+					that.ShowAnswerChange()
+					if (that.curTimeoutId) {
+						clearTimeout(that.curTimeoutId)
+					}
+					that.curTimeoutId = setTimeout(function() {
+						that.subjectIndex += 1;
+						that.autoTimesNext()
+					}, 500)
+					
 				}
 			},
 			autoTimesNext() {
-				//倒计时 10秒进入下一题
-				if (that.curIntervalId) {
-					clearInterval(that.curIntervalId)
-				}
-				that.timecount = 10
-				that.curIntervalId = setInterval(function() {
-					that.timecount--
-					if (that.timecount == 0) {
-						that.MoveSubject(1)
+				if(this.subjectIndex <10){
+					//倒计时 10秒进入下一题
+					if (that.curIntervalId) {
+						clearInterval(that.curIntervalId)
 					}
-				}, 1000)
+					that.timecount = 10
+					that.curIntervalId = setInterval(function() {
+						that.timecount--
+						if (that.timecount == 0) {
+							if(that.subjectIndex == 9){//最后一题
+								that.answerToService()
+							}else{
+								that.MoveSubject(1)
+							}
+							
+						}
+					}, 1000)
+				}
+			},
+			answerToService(){
+				
+				let ansY = 0;
+				for(let i=0;i<that.subjectList.length;i++){
+					let item = that.subjectList[i]
+					if(item.answer == item.userAnswer){
+						ansY = ansY + 1
+					}
+				}
+				console.log('**********************ansY'+JSON.stringify(ansY))
+				that.$api.getAnswerDetailAddOrUpdateAward({
+					integral: ansY
+				}).then((res) => {
+					let resData = res.data
+					if(resData.state_code == '400200'){
+						uni.navigateBack({
+							
+						})
+					}else{
+						that.showToast(resData.msg)
+					}
+				
+				}).catch((err) => {
+					
+				})
 			},
 			AppointedSubject: function(e) { //题卡指定
 
@@ -658,5 +440,21 @@
 	.timeCount {
 		font-size: 30upx;
 		color: #E44025;
+	}
+	.bottomBackview{
+		width: 100%;
+		height: 200upx;
+		display: flex;
+		justify-content: center;
+	}
+	.bottomBtn {
+		width: 50%;
+		height: 100upx;
+		background-color: #007AFF;
+		color: #FFFFFF;
+		border-radius: 30upx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 </style>

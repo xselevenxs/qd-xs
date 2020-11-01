@@ -8,64 +8,97 @@
 			//  临时修改为默认的token  <<<<
 			var myAppId = that.$store.state.myAppId
 			var myWeiXinHttp = that.$store.state.myWeiXinHttp
-			// 			判断是微信环境
+
+
 			if (that.is_weixin()) {
+
+				var nativeToken = uni.getStorageInfoSync('nativeTokenInfo_key')
+console.log('******************333**nativeToken**res33=' + JSON.stringify(uni.getStorage('nativeTokenInfo_key')))
+				if (nativeToken) {
+
+				} else {
+					console.log('****************66666666' )
+					uni.setStorageSync()({
+						key: "nativeTokenInfo_key",
+						data: 'first_save',
+						success() {
+							console.log("first保存成功");
+						}
+					})
+				}
+				console.log('******************333**nativeTokenInfo_key**res33=' + JSON.stringify(uni.getStorage('nativeTokenInfo_key')))
 				uni.getStorage({
 					key: "nativeTokenInfo_key",
 					success(res) {
-
-						var url = window.location.href;
-						var netCode = that.UrlSearch(url);
-						if (!netCode) {
-							netCode = that.getParam('code');
-						}
-						 
-						console.log('******************333****' + JSON.stringify(netCode))
-						// if(value != undefined&value.length>0)
-						if (netCode) {
-							uni.request({
-								url: that.$store.state.serviceUrl + '/weChart/authorization',
-								method: 'POST',
-								data: {
-									code: netCode
-								},
-								header: {
-									'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-								},
-								success(res) {
-									let resData = res.data
-									console.log("xs获取token相关信息3=" + JSON.stringify(resData));
-									if (resData.state_code == '400200') {
-										uni.setStorage({
-											key: "nativeTokenInfo_key",
-											data: resData.data.access_token,
-										})
-										console.log("xs获取token相关信息6=" + JSON.stringify(resData.data.access_token));
-										that.$store.commit('setToken', resData.data.access_token)
-										that.getUserInfo(resData.data.access_token)
-									} else {
-										// that.showToast(resData.state_msg)
-									}
-
-								},
-								fail(res) {
-									console.log("xs获取用户相关信息失败 res=" + JSON.stringify(res));
+						console.log('******************333**nativeTokenInfo_key**res=' + JSON.stringify(res))
+						return
+						if (res == 'first_save') {
+							uni.setStorageSync()({
+								key: "nativeTokenInfo_key",
+								data: 'second_save',
+								success() {
+									console.log("first保存成功");
 								}
 							})
-							uni.removeStorageSync('nativeCode_key');
+							window.location.href =
+								"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + myAppId + "&redirect_uri=" + myWeiXinHttp +
+								"&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+						} else if (res == 'second_save') {
+							var url = window.location.href;
+							var netCode = that.UrlSearch(url);
+							if (!netCode) {
+								netCode = that.getParam('code');
+							}
+
+							console.log('******************333****' + JSON.stringify(netCode))
+							// if(value != undefined&value.length>0)
+							if (netCode) {
+								uni.request({
+									url: that.$store.state.serviceUrl + '/weChart/authorization',
+									method: 'POST',
+									data: {
+										code: netCode
+									},
+									header: {
+										'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+									},
+									success(res) {
+										let resData = res.data
+										console.log("xs获取token相关信息3=" + JSON.stringify(resData));
+										if (resData.state_code == '400200') {
+											uni.setStorage({
+												key: "nativeTokenInfo_key",
+												data: resData.data.access_token,
+											})
+											console.log("xs获取token相关信息6=" + JSON.stringify(resData.data.access_token));
+											that.$store.commit('setToken', resData.data.access_token)
+											that.getUserInfo(resData.data.access_token)
+										} else {
+											// that.showToast(resData.state_msg)
+										}
+
+									},
+									fail(res) {
+										console.log("xs获取用户相关信息失败 res=" + JSON.stringify(res));
+									}
+								})
+							}
+
+						} else {
+							that.getUserInfo(res)
 						}
 					},
 					fail() {
-						uni.setStorage({
-							key: "nativeTokenInfo_key",
-							data: 'nativeTokenInfo',
-							success() {
-								console.log("xs保存成功");
-							}
-						})
-						window.location.href =
-							"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + myAppId + "&redirect_uri=" + myWeiXinHttp +
-							"&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+						// uni.setStorage({
+						// 	key: "nativeTokenInfo_key",
+						// 	data: 'second_save',
+						// 	success() {
+						// 		console.log("xs保存成功");
+						// 	}
+						// })
+						// window.location.href =
+						// 	"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + myAppId + "&redirect_uri=" + myWeiXinHttp +
+						// 	"&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
 					}
 				});
 			} else {
@@ -79,7 +112,9 @@
 			console.log('App Hide');
 		},
 		methods: {
-			getUserInfo(cToken){//
+			getUserInfo(cToken) { //
+				var myAppId = that.$store.state.myAppId
+				var myWeiXinHttp = that.$store.state.myWeiXinHttp
 				uni.request({
 					url: that.$store.state.serviceUrl + '/login/getUserInfo',
 					method: 'POST',
@@ -93,12 +128,23 @@
 						let resData = res.data
 						console.log("xs获取token相关信息=" + JSON.stringify(resData));
 						if (resData.state_code == '400200') {
-		
+
 							that.$store.commit('setUserInfo', resData.data)
+						} else if (resData.state_code == '400407') {
+							// uni.setStorage({
+							// 	key: "nativeTokenInfo_key",
+							// 	data: 'second_save',
+							// 	success() {
+							// 		console.log("xs保存成功");
+							// 	}
+							// })
+							// window.location.href =
+							// 	"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + myAppId + "&redirect_uri=" + myWeiXinHttp +
+							// 	"&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
 						} else {
-							// that.showToast(resData.state_msg)
+
 						}
-				
+
 					},
 					fail(res) {
 						console.log("xs获取用户相关信息失败 res=" + JSON.stringify(res));

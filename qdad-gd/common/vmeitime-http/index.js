@@ -93,7 +93,37 @@ export const getTikuListRandom = (data) => {
 		data,
 	})
 }
-// 轮播图    
+//提交答案 得分
+export const getAnswerDetailAddOrUpdateAward = (data) => {
+
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+
+		//判断返回状态 执行相应操作
+		return response;
+	}
+	return http.request({
+		url: '/answerDetail/addOrUpdateAward',
+		dataType: 'json',
+		data,
+	})
+}
+//我的奖品列表
+export const getAwardList = (data) => {
+
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+
+		//判断返回状态 执行相应操作
+		return response;
+	}
+	return http.request({
+		url: '/award/list ',
+		dataType: 'json',
+		data,
+	})
+}
+// 轮播图   
 export const banner = (data) => {
 	return http.request({
 		url: '/banner/36kr',
@@ -111,5 +141,7 @@ export default {
 	getUserGetById,
 	getLoginUserInfo,
 	getTikuListRandom,
+	getAnswerDetailAddOrUpdateAward,
+	getAwardList,
 	banner
 }
