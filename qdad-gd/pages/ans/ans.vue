@@ -165,8 +165,14 @@
 
 <script>
 	var that
-	
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex';
 	export default {
+		computed: {
+			...mapState(['ansList'])
+		},
 		data() {
 			return {
 				curIntervalId: '',
@@ -177,8 +183,8 @@
 				autoShowAnswer: true, //答错是否显答案
 				autoRadioNext: false, //判断题、单项题，自动移下一题
 				swiperHeight: '800px', //
-				title: '初中二年级2019期中考券',
-				subjectList: [{
+				title: '答题',
+				subjectList222: [{
 						"title": "水是液体？",
 						"type": 1,
 						"optionList": [{
@@ -257,6 +263,192 @@
 						"explain": "问答题没有选项，无法做答，且不参与计分"
 					}
 				],
+				subjectList: [{
+					"title": "新建和改造的生活垃圾收集站应具备厨余垃圾和其他垃圾分类暂存及转运功能。鼓励有条件的增加可回收物和有害垃圾分类暂存及转运功能，并符合管理规范要求。（）",
+					"type": 1,
+					"answer": "A",
+					"userAnswer": null,
+					"userFavor": false,
+					"explain": null,
+					"optionList": [{
+						"id": "A",
+						"content": "正确"
+					}, {
+						"id": "B",
+						"content": "错误"
+					}]
+				}, {
+					"title": "单位和个人应当减少使用或者按照规定不使用（），优先采购（）产品。",
+					"type": 2,
+					"answer": "A",
+					"userAnswer": null,
+					"userFavor": false,
+					"explain": null,
+					"optionList": [{
+						"id": "A",
+						"content": "A、一次性用品，可重复使用和再利用"
+					}, {
+						"id": "B",
+						"content": "B、石油化工用品，纸质和纯天然"
+					}, {
+						"id": "C",
+						"content": "C、高能耗产品，低能耗"
+					}, {
+						"id": "D",
+						"content": "D、精致包装产品，简易包装"
+					}, {
+						"id": "E",
+						"content": null
+					}]
+				}, {
+					"title": "易破损或有尖锐边角的可回收物，应包裹后投放。（）",
+					"type": 1,
+					"answer": "A",
+					"userAnswer": null,
+					"userFavor": false,
+					"explain": null,
+					"optionList": [{
+						"id": "A",
+						"content": "正确"
+					}, {
+						"id": "B",
+						"content": "错误"
+					}]
+				}, {
+					"title": "有害垃圾不包括以下哪类：（）",
+					"type": 2,
+					"answer": "D",
+					"userAnswer": null,
+					"userFavor": false,
+					"explain": null,
+					"optionList": [{
+						"id": "A",
+						"content": "A废相纸类：X光片、相片底片"
+					}, {
+						"id": "B",
+						"content": "B废杀虫剂类：杀虫喷雾罐、消毒剂、老鼠药、农药及其包装物"
+					}, {
+						"id": "C",
+						"content": "C废油漆类：废油漆桶、染发剂壳、过期的指甲油、洗甲水"
+					}, {
+						"id": "D",
+						"content": "D织物：衣物、箱包、床上用品、窗帘等"
+					}, {
+						"id": "E",
+						"content": null
+					}]
+				}, {
+					"title": "公共机构办公场所应及时清运装修和大件垃圾，宜设置装修垃圾、大件垃圾等临时堆放点，临时堆放点应设置在不妨碍交通安全、便于管理的区域，面积宜不少于",
+					"type": 1,
+					"answer": "A",
+					"userAnswer": null,
+					"userFavor": false,
+					"explain": null,
+					"optionList": [{
+						"id": "A",
+						"content": "正确"
+					}, {
+						"id": "B",
+						"content": "错误"
+					}]
+				}, {
+					"title": "猪羊牛等动物大块骨头属()。",
+					"type": 2,
+					"answer": "B",
+					"userAnswer": null,
+					"userFavor": false,
+					"explain": null,
+					"optionList": [{
+						"id": "A",
+						"content": "A、厨余垃圾"
+					}, {
+						"id": "B",
+						"content": "B、其他垃圾　"
+					}, {
+						"id": "C",
+						"content": "C、可回收物"
+					}, {
+						"id": "D",
+						"content": "D、有害垃圾"
+					}, {
+						"id": "E",
+						"content": null
+					}]
+				}, {
+					"title": "家庭日常生活中打碎的陶瓷碗碟属于可回收物。（）",
+					"type": 1,
+					"answer": "B",
+					"userAnswer": null,
+					"userFavor": false,
+					"explain": null,
+					"optionList": [{
+						"id": "A",
+						"content": "正确"
+					}, {
+						"id": "B",
+						"content": "错误"
+					}]
+				}, {
+					"title": "我市生活垃圾分类工作遵循（）的原则。",
+					"type": 2,
+					"answer": "D",
+					"userAnswer": null,
+					"userFavor": false,
+					"explain": null,
+					"optionList": [{
+						"id": "A",
+						"content": "A.垃圾分类举手之劳，共建和谐美好青岛"
+					}, {
+						"id": "B",
+						"content": "B.垃圾科学分类，文明你我同行"
+					}, {
+						"id": "C",
+						"content": "C.垃圾分类人人参与，共创岛城生态文明"
+					}, {
+						"id": "D",
+						"content": "D.政府推动、全民参与、城乡统筹、系统推进"
+					}, {
+						"id": "E",
+						"content": null
+					}]
+				}, {
+					"title": "厨余垃圾不包括以下哪类：（）",
+					"type": 2,
+					"answer": "C",
+					"userAnswer": null,
+					"userFavor": false,
+					"explain": null,
+					"optionList": [{
+						"id": "A",
+						"content": "A废弃食品调料"
+					}, {
+						"id": "B",
+						"content": "B 剩菜剩饭"
+					}, {
+						"id": "C",
+						"content": "C废杀虫剂类"
+					}, {
+						"id": "D",
+						"content": "D 瓜皮果核"
+					}, {
+						"id": "E",
+						"content": null
+					}]
+				}, {
+					"title": "未采取集中收集方式的区域内，公共机构应合理设置可回收物和有害垃圾收集点，有害垃圾收集点应设置在有人看管的区域。（）",
+					"type": 1,
+					"answer": "A",
+					"userAnswer": null,
+					"userFavor": false,
+					"explain": null,
+					"optionList": [{
+						"id": "A",
+						"content": "正确"
+					}, {
+						"id": "B",
+						"content": "错误"
+					}]
+				}],
 				modalCard: null, //显示答题卡
 				modalError: null, //纠错卡
 				errorList: ['题目不完整', '答案不正确', '含有错别字', '图片不存在', '解析不完整', '其他错误']
@@ -300,12 +492,15 @@
 					}).exec();
 				}
 			});
-			that.autoTimesNext()
+			// that.autoTimesNext()
 		},
 		onLoad() {
 			that = this
+			console.log('**********************' + JSON.stringify(that.ansList))
+			// this.subjectList = that.ansList
+			console.log('*********************this.subjectList*' + JSON.stringify(this.subjectList))
 			this.currentType = this.subjectList[0].type;
-			
+
 
 			//添加用户显示答案字段
 			for (var i = 0; i < this.subjectList.length; i++) {
@@ -314,9 +509,9 @@
 
 		},
 		onUnload() {
-			if(that.curIntervalId){
+			if (that.curIntervalId) {
 				clearInterval(that.curIntervalId)
-			}	
+			}
 		},
 		methods: {
 			showCardModal: function(e) {
@@ -400,22 +595,22 @@
 				}
 				if (e === 1 && this.subjectIndex < this.subjectList.length - 1) {
 					this.subjectIndex += 1;
-					
-						that.autoTimesNext()
+
+					that.autoTimesNext()
 				}
 			},
-			autoTimesNext(){
-					//倒计时 10秒进入下一题
-					if(that.curIntervalId){
-						clearInterval(that.curIntervalId)
+			autoTimesNext() {
+				//倒计时 10秒进入下一题
+				if (that.curIntervalId) {
+					clearInterval(that.curIntervalId)
+				}
+				that.timecount = 10
+				that.curIntervalId = setInterval(function() {
+					that.timecount--
+					if (that.timecount == 0) {
+						that.MoveSubject(1)
 					}
-					that.timecount = 10
-					that.curIntervalId = setInterval(function(){
-						that.timecount--
-						if(that.timecount == 0){
-							that.MoveSubject(1)
-						}
-					},1000)	
+				}, 1000)
 			},
 			AppointedSubject: function(e) { //题卡指定
 
@@ -459,6 +654,7 @@
 	.cu-list.menu>.cu-item-error {
 		justify-content: flex-start;
 	}
+
 	.timeCount {
 		font-size: 30upx;
 		color: #E44025;

@@ -48,6 +48,51 @@ export const getMobileLogin = (data) => {
 		data,
 	})
 }
+// 获取用户信息
+export const getUserGetById = (data) => {
+
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+
+		//判断返回状态 执行相应操作
+		return response;
+	}
+	return http.request({
+		url: '/user/getById',
+		dataType: 'json',
+		data,
+	})
+}
+// 获取用户信息
+export const getLoginUserInfo = (data) => {
+
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+
+		//判断返回状态 执行相应操作
+		return response;
+	}
+	return http.request({
+		url: '/login/getUserInfo',
+		dataType: 'json',
+		data,
+	})
+}
+// 抽题
+export const getTikuListRandom = (data) => {
+
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+
+		//判断返回状态 执行相应操作
+		return response;
+	}
+	return http.request({
+		url: '/tiku/listRandom',
+		dataType: 'json',
+		data,
+	})
+}
 // 轮播图    
 export const banner = (data) => {
 	return http.request({
@@ -63,5 +108,8 @@ export const banner = (data) => {
 export default {
 	test,
 	getMobileLogin,
+	getUserGetById,
+	getLoginUserInfo,
+	getTikuListRandom,
 	banner
 }

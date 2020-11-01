@@ -51,7 +51,16 @@
 		"devServer": {
 			"disableHostCheck": true,
 			"port": 8089,
-			"https": false
+			"https": false,
+			"proxy": {
+			                "/wctest": {
+			                    "target": "http://wctest.lanbenzi.cn:8001/dati",
+			                    "changeOrigin": true,
+			                    "secure": false,
+			
+			                    "pathRewrite":{"^/wctest":""}
+			                }
+			            }
 		}
 	}
 }

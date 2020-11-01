@@ -4,10 +4,11 @@
 			<image src="/static/images/bg.png" class="cont"></image>
 			<view class="header">
 				<view class="padding-xl radius shadow bg-white info">
-					<view class="cu-avatar xl round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
+					<!-- <view class="cu-avatar xl round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view> -->
+					<image v-bind:src=wxHeaderImage class="cu-avatar xl round"></image>
 					<view class="mid">
-						<view>昵称：{{nickname}}</view>
-						<view>积分：</view>
+						<view>昵称：{{userInfo.userName}}</view>
+						<view>积分：{{userInfo.integral}}</view>
 					</view>
 					<view class="padding-sm radius shadow bg-red">
 						我的奖品
@@ -26,47 +27,91 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations
+	} from 'vuex';
 	var that
 	export default {
+		computed: {
+			...mapState(['userInfo'])
+		},
 		data() {
 			return {
-				nickname: ''
+				nickname: '',
+				wxHeaderImage:  'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
 			}
 		},
 		onLoad() {
 			that = this
+			
+		},
+		onShow() {
+				that.getUserInfo()
+				if(that.userInfo.headImage){
+					that.wxHeaderImage = that.userInfo.headImage
+				}
 		},
 		methods: {
 			drawClick() {
-				// uni.navigateTo({
-				// 	url: '../activity/draw'
-				// })
-				// uni.request({
-				//     url: 'http://182.92.91.60:8001/dati/login/login', //仅为示例，并非真实接口地址。
-				//     data: {
-				//         mobile: '18583309227', 
-				//     },
-				//     success: (res) => {
-				//         console.log('*******************333***'+JSON.stringify(res))
-				//         console.log('*******************222***'+JSON.stringify(res.data))
-				// 		console.log('*******************666***'+JSON.stringify(res.data.state_msg))
-				//     }
-				// });
+				uni.navigateTo({
+					url: '../activity/draw'
+				})
+			},
+			startAns(){
+				if(that.userInfo.isAnswer == '0' || that.userInfo.isAnswer == 0){
+					that.$api.getTikuListRandom({
+					}).then((res) => {
+						let resData = res.data
+						if(resData.state_code == '400200'){
+							that.$store.commit('setAnsList',resData.data)
+							uni.navigateTo({
+								url: '../ans/ans'
+							})
+						}else{
+							that.showToast(resData.msg)
+						}
+					
+					}).catch((err) => {
+						
+					})
+				}else{
+					that.showToast('您今日已答题，每人每天仅能答题一次')
+				}
 				
-				// return
-				// config.log('****'+JSON.stringify('33'))
-				that.$api.getMobileLogin({
-					mobile: '18583309227'
+			},
+			getUserInfo(){//
+				that.$api.getLoginUserInfo({
 				}).then((res) => {
-				that.nickname = res.data.state_msg
-					console.log('**********************'+JSON.stringify(res))
+					let resData = res.data
+					if(resData.state_code == '400200'){
+						that.$store.commit('setUserInfo', resData.data)
+					}else{
+						
+					}
+				
 				}).catch((err) => {
 					
 				})
 			},
-			startAns(){
-				uni.navigateTo({
-					url: '../ans/ans'
+			getMobileLogin(){
+				that.$api.getMobileLogin({
+					mobile: '17091008732'
+				}).then((res) => {
+					let resData = res.data
+					if(resData.state_code == '400200'){
+						uni.setStorage({
+							key: "nativeTokenInfo_key",
+							data: resData.data.access_token,
+						})
+						that.$store.commit('setToken',resData.data.access_token)
+						that.getUserInfo()
+					}else{
+						that.showToast(resData.state_msg)
+					}
+				
+				}).catch((err) => {
+					
 				})
 			}
 		}

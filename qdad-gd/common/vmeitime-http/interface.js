@@ -35,7 +35,9 @@ export default {
 		baseUrl: store.state.serviceUrl,
 		header: {
 			'Content-Type': 'application/json;charset=UTF-8',
-			'Content-Type': 'application/x-www-form-urlencoded'
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Authorization': store.state.token,
+			'Access-Control-Allow-Origin': '*'
 		},
 		data: {},
 		method: "POST",
@@ -106,6 +108,7 @@ export default {
 				if (statusCode === 200) { //成功
 					var res = response.data;
 					if (res && res.code) {
+						console.log('******************resres****'+JSON.stringify(res))
 						if (res.code == 12000) {
 							this._auth()
 						}
