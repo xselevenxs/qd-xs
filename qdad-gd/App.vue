@@ -12,38 +12,25 @@
 
 			if (that.is_weixin()) {
 
-				var nativeToken = uni.getStorageInfoSync('nativeTokenInfo_key')
-console.log('******************333**nativeToken**res33=' + JSON.stringify(uni.getStorage('nativeTokenInfo_key')))
+				var nativeToken = uni.getStorageSync('nativeTokenInfo_key')
+				console.log('************nativeToken**res33=' + JSON.stringify(uni.getStorageSync('nativeTokenInfo_key')))
 				if (nativeToken) {
 
 				} else {
-					console.log('****************66666666' )
-					uni.setStorageSync()({
-						key: "nativeTokenInfo_key",
-						data: 'first_save',
-						success() {
-							console.log("first保存成功");
-						}
-					})
+					console.log('************nativeToken**res33=' + JSON.stringify(uni.getStorageSync('nativeTokenInfo_key')))
+					uni.setStorageSync('nativeTokenInfo_key', 'first_save')
 				}
-				console.log('******************333**nativeTokenInfo_key**res33=' + JSON.stringify(uni.getStorage('nativeTokenInfo_key')))
+				
 				uni.getStorage({
 					key: "nativeTokenInfo_key",
-					success(res) {
-						console.log('******************333**nativeTokenInfo_key**res=' + JSON.stringify(res))
-						return
-						if (res == 'first_save') {
-							uni.setStorageSync()({
-								key: "nativeTokenInfo_key",
-								data: 'second_save',
-								success() {
-									console.log("first保存成功");
-								}
-							})
+					success(storageRes) {
+						console.log('**************nativeTokenInfo_key**res=' + JSON.stringify(storageRes))
+						if (storageRes.data == 'first_save') {
+							uni.setStorageSync('nativeTokenInfo_key','second_save')
 							window.location.href =
 								"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + myAppId + "&redirect_uri=" + myWeiXinHttp +
-								"&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
-						} else if (res == 'second_save') {
+								"&response_type=code&scope=snsapi_userinfo#wechat_redirect";
+						} else if (storageRes.data == 'second_save') {
 							var url = window.location.href;
 							var netCode = that.UrlSearch(url);
 							if (!netCode) {
@@ -51,7 +38,6 @@ console.log('******************333**nativeToken**res33=' + JSON.stringify(uni.ge
 							}
 
 							console.log('******************333****' + JSON.stringify(netCode))
-							// if(value != undefined&value.length>0)
 							if (netCode) {
 								uni.request({
 									url: that.$store.state.serviceUrl + '/weChart/authorization',
@@ -85,20 +71,20 @@ console.log('******************333**nativeToken**res33=' + JSON.stringify(uni.ge
 							}
 
 						} else {
-							that.getUserInfo(res)
+							that.getUserInfo(storageRes.data)
 						}
 					},
 					fail() {
-						// uni.setStorage({
-						// 	key: "nativeTokenInfo_key",
-						// 	data: 'second_save',
-						// 	success() {
-						// 		console.log("xs保存成功");
-						// 	}
-						// })
-						// window.location.href =
-						// 	"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + myAppId + "&redirect_uri=" + myWeiXinHttp +
-						// 	"&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+						uni.setStorage({
+							key: "nativeTokenInfo_key",
+							data: 'second_save',
+							success() {
+								console.log("xs保存成功");
+							}
+						})
+						window.location.href =
+							"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + myAppId + "&redirect_uri=" + myWeiXinHttp +
+							"&response_type=code&scope=snsapi_userinfo#wechat_redirect";
 					}
 				});
 			} else {
@@ -131,16 +117,16 @@ console.log('******************333**nativeToken**res33=' + JSON.stringify(uni.ge
 
 							that.$store.commit('setUserInfo', resData.data)
 						} else if (resData.state_code == '400407') {
-							// uni.setStorage({
-							// 	key: "nativeTokenInfo_key",
-							// 	data: 'second_save',
-							// 	success() {
-							// 		console.log("xs保存成功");
-							// 	}
-							// })
-							// window.location.href =
-							// 	"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + myAppId + "&redirect_uri=" + myWeiXinHttp +
-							// 	"&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+							uni.setStorage({
+								key: "nativeTokenInfo_key",
+								data: 'second_save',
+								success() {
+									console.log("xs保存成功");
+								}
+							})
+							window.location.href =
+								"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + myAppId + "&redirect_uri=" + myWeiXinHttp +
+								"&response_type=code&scope=snsapi_userinfo#wechat_redirect";
 						} else {
 
 						}
