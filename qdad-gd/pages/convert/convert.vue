@@ -1,5 +1,5 @@
 <template>
-	<view class="container">
+	<view class="container" v-bind:style="{height:screenHeight+'px'}">
 		<view class="header">
 			<view class="ticket">
 				<view class="type">洗车券</view>
@@ -21,7 +21,7 @@
 	export default {
 		data() {
 			return {
-				
+				screenHeight: 0,
 			}
 		},
 		methods: {

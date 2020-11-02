@@ -43,6 +43,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/virtualGoodsDetail/virtualGoodsDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

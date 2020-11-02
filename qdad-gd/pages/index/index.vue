@@ -1,5 +1,5 @@
 <template>
-	<view class="conbox">
+	<view class="conbox" v-bind:style="{height:screenHeight+'px'}">
 		<view class="container">
 			<image src="/static/images/bg.png" class="cont"></image>
 			<view class="header">
@@ -34,23 +34,26 @@
 	var that
 	export default {
 		computed: {
-			...mapState(['userInfo'])
+			...mapState(['userInfo', 'token'])
 		},
 		data() {
 			return {
 				nickname: '',
-				wxHeaderImage:  'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
+				wxHeaderImage: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
 			}
 		},
 		onLoad() {
 			that = this
-			
+
 		},
 		onShow() {
+			if (that.token) {
 				that.getUserInfo()
-				if(that.userInfo.headImage){
-					that.wxHeaderImage = that.userInfo.headImage
-				}
+			}
+
+			if (that.userInfo.headImage) {
+				that.wxHeaderImage = that.userInfo.headImage
+			}
 		},
 		methods: {
 			drawClick() {
@@ -58,60 +61,58 @@
 					url: '../activity/draw'
 				})
 			},
-			startAns(){
-				if(that.userInfo.isAnswer == '0' || that.userInfo.isAnswer == 0){
-					that.$api.getTikuListRandom({
-					}).then((res) => {
+			startAns() {
+				if (that.userInfo.isAnswer == '0' || that.userInfo.isAnswer == 0) {
+					that.$api.getTikuListRandom({}).then((res) => {
 						let resData = res.data
-						if(resData.state_code == '400200'){
-							that.$store.commit('setAnsList',resData.data)
+						if (resData.state_code == '400200') {
+							that.$store.commit('setAnsList', resData.data)
 							uni.navigateTo({
 								url: '../ans/ans'
 							})
-						}else{
+						} else {
 							that.showToast(resData.msg)
 						}
-					
+
 					}).catch((err) => {
-						
+
 					})
-				}else{
+				} else {
 					that.showToast('您今日已答题，每人每天仅能答题一次')
 				}
-				
+
 			},
-			getUserInfo(){//
-				that.$api.getLoginUserInfo({
-				}).then((res) => {
+			getUserInfo() { //
+				that.$api.getLoginUserInfo({}).then((res) => {
 					let resData = res.data
-					if(resData.state_code == '400200'){
+					if (resData.state_code == '400200') {
 						that.$store.commit('setUserInfo', resData.data)
-					}else{
-						
+					} else {
+
 					}
-				
+
 				}).catch((err) => {
-					
+
 				})
 			},
-			getMobileLogin(){
+			getMobileLogin() {
 				that.$api.getMobileLogin({
 					mobile: '17091008732'
 				}).then((res) => {
 					let resData = res.data
-					if(resData.state_code == '400200'){
+					if (resData.state_code == '400200') {
 						uni.setStorage({
 							key: "nativeTokenInfo_key",
 							data: resData.data.access_token,
 						})
-						that.$store.commit('setToken',resData.data.access_token)
+						that.$store.commit('setToken', resData.data.access_token)
 						that.getUserInfo()
-					}else{
+					} else {
 						that.showToast(resData.state_msg)
 					}
-				
+
 				}).catch((err) => {
-					
+
 				})
 			}
 		}

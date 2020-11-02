@@ -11,7 +11,7 @@
 
 
 			if (that.is_weixin()) {
-
+				return
 				var nativeToken = uni.getStorageSync('nativeTokenInfo_key')
 				console.log('************nativeToken**res33=' + JSON.stringify(uni.getStorageSync('nativeTokenInfo_key')))
 				if (nativeToken) {
@@ -186,4 +186,8 @@
 	}
 
 	/* #endif */
+	
+	.container {
+		background-color: #FFFFFF;
+	}
 </style>

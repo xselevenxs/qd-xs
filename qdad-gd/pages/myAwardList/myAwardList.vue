@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
 		<view v-for="(item,index) in awardList" :key="index" >
-			<view class="item">
+			<view class="item" @click="itemClick(item)">
 				<image class="img" v-if="item.type == '1'" mode="aspectFit" src="/static/daijinquan.jpg"></image>
 				<image class="img" v-if="item.type == '2'" mode="aspectFit" src="../../static/iphone12.jpeg"></image>
 				<image class="img" v-if="item.type == '3'" mode="aspectFit" src="../../static/lipinquan.jpg"></image>
@@ -16,7 +16,7 @@
 				<view class="state" v-if="item.type == '3'">未提交</view>
 			</view>
 		</view>
-		<view  style="text-align: center;margin-top: 50upx;">客服电话：400900998</view>
+		<view  class="connect">客服电话：0532—85702909</view>
 	</view>
 	
 </template>
@@ -42,6 +42,18 @@
 			that.getMyAwards()
 		},
 		methods: {
+			itemClick(item){
+				if(item.type == '1'){
+					uni.navigateTo({
+						url: '../virtualGoodsDetail/virtualGoodsDetail'
+					})
+				}else{
+					uni.navigateTo({
+						url: '../submitInfo/submitInfo'
+					})
+				}
+					
+			},
 			getMyAwards(){
 				that.$api.getAwardList({
 				}).then((res) => {
@@ -92,5 +104,11 @@
 .state{
 	width: 150upx;
 	font-size: 30upx;
+}
+.connect {
+	text-align: center;
+	position: absolute;
+	bottom: 30upx;
+	width: 100%;
 }
 </style>
