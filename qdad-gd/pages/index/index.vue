@@ -19,6 +19,7 @@
 				</view>
 			</view>
 			<view class="middle">
+				<image src="../../static/titliecontent.jpeg" class="titliecontent"></image>
 				<!-- <image @click="startAns" src="../../static/startAns2.png" class="startans"></image> -->
 				<image @click="startAns" src="../../static/anss.png" class="startans"></image>
 				<image @click="drawClick" src="../../static/drawss.png" class="draws"></image>
@@ -225,7 +226,13 @@
 		font-size: 50upx;
 		color: #C0C0C0;
 	}
-
+	.titliecontent{
+		width: 400upx;
+		height: 136upx;
+		position: absolute;
+		right: 175upx;
+		bottom: 600upx;
+	}
 	.startans {
 		width: 400upx;
 		height: 136upx;
