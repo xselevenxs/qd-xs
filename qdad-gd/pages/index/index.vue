@@ -1,7 +1,7 @@
 <template>
 	<view class="conbox">
 		<view class="container2">
-			<image src="/static/background_bg.jpg" class="cont"></image>
+			<image src="/static/glable-bgconfirm.jpg" class="cont"></image>
 			<view class="header">
 				<view class="padding-xl radius shadow bg-white info">
 					<!-- <view class="cu-avatar xl round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view> -->
@@ -19,12 +19,13 @@
 				</view>
 			</view>
 			<view class="middle">
-				<image @click="startAns" src="../../static/startAns2.png" class="startans"></image>
+				<!-- <image @click="startAns" src="../../static/startAns2.png" class="startans"></image> -->
+				<image @click="startAns" src="../../static/anss.png" class="startans"></image>
+				<image @click="drawClick" src="../../static/drawss.png" class="draws"></image>
 			</view>
 
-
-			<view class="ans">答题</view>
-			<view @click="drawClick" class="draw">抽奖</view>
+			<!-- <view class="ans">答题</view>
+			<view @click="drawClick" class="draw">抽奖</view> -->
 		</view>
 	</view>
 </template>
@@ -43,7 +44,7 @@
 			return {
 				screenHeight: 0,
 				nickname: '',
-				wxHeaderImage:  'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
+				wxHeaderImage:  '/static/headerdefault.png'
 			}
 		},
 		onLoad() {
@@ -227,7 +228,15 @@
 		height: 136upx;
 		position: absolute;
 		right: 175upx;
-		bottom: 300upx;
+		bottom: 400upx;
+		border-radius: 50upx;
+	}
+	.draws {
+		width: 400upx;
+		height: 136upx;
+		position: absolute;
+		right: 175upx;
+		bottom: 200upx;
 		border-radius: 50upx;
 	}
 </style>

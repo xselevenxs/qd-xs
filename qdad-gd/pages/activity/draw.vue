@@ -32,19 +32,19 @@
 			</view>
 			<view class="btnView">
 				<view class="mark">已有积分：<span style="color: #0BB20C;">{{userInfo.integral}}</span>分</view>
-				<view @click="convertClick" class="convert">兑换保护劵</view>
+				<view @click="convertClick" class="convert">兑换</view>
 				<view @click="prizeClick" class="my">我的奖品</view>
 			</view>
 			<!-- 规则 -->
-			<view class="guize" style="margin-top: 10upx;">
+			<view class="guize" style="margin-top: 30upx;">
 				<view class="title">
 					规则说明
 				</view>
 				<view class="g_item">
-					2.用户点击大转盘抽奖按钮，每次抽奖需20积分
+					1.用户点击大转盘抽奖按钮，每次抽奖需20积分
 				</view>
 				<view class="g_item">
-					3.用户获得的奖品，可在我的奖品里查看
+					2.用户获得的奖品，可在我的奖品里查看
 				</view>
 			</view>
 		</view>
@@ -401,7 +401,7 @@
 
 
 	.guize {
-		width: 502upx;
+		width: 602upx;
 		min-height: 300upx;
 		display: flex;
 		flex-direction: column;

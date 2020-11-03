@@ -6,8 +6,10 @@
 				<view class="from">由兔师傅提供健康保护券券一张</view>
 				<view class="time">有效期：2021年01月31日</view>
 				<view @click="convertClick" class="btn">兑换</view> -->
+				<image src="../../static/baohu-m.png" style="width: 100%;height: 100%;"></image>
 			</view>
 		</view>
+		<view @click="convertClick" class="btn">兑换</view>
 		<view class="adress">
 			<view>门店地址：</view>
 			<view>XXXX店</view>
@@ -68,9 +70,7 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		background-color: #D2F1F0;
 		position: relative;
-		background-image: url(../../static/healthBH-s.png);
 	}
 	.type {
 		position: absolute;
@@ -93,13 +93,13 @@
 		color: #999999;
 	}
 	.btn {
-		position: absolute;
-		right: 40upx;
-		bottom: 200upx;
-		color: #FFFFFF;
 		background-color: #39B54A;
 		padding: 20upx 40upx;
 		border-radius: 5upx;
+		width: 500upx;
+		color: #FFFFFF;
+		margin: 30upx auto;
+		text-align: center;
 	}
 	.adress {
 		padding: 40upx;

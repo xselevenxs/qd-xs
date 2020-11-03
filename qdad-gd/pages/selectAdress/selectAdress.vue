@@ -181,7 +181,7 @@
 		padding: 15upx 15upx;
 		background-color: #FFFFFF;
 		position: absolute;
-		top: 400upx;
+		bottom: 400upx;
 		
 	}
 	
