@@ -1,14 +1,14 @@
 <template>
 	<view class="conbox">
 		<view class="container2">
-			<image src="/static/background_bg.jpg" class="cont"></image>
+			<image src="/static/q-bg.jpg" class="cont"></image>
 			<view class="itemBackView" @click="townAddressChoose">
 				<view class="leftClass">街道</view>
 				<input type="text" placeholder="点击选择街道" disabled="true" :value="townAddress" class="inputClass2" />
 				<image class="rightSelectImage" src="/static/show_more.png"></image>
 			</view>
 		<!-- 镇 -->
-		<w-picker-new :visible.sync="townAddressVisible" :value="registerInfo.townAddress" mode="selector" @confirm="onTownAddressConfirm"
+		<w-picker-new :visible.sync="townAddressVisible" :value="townAddress" mode="selector" @confirm="onTownAddressConfirm"
 		 default-type="title" :default-props="defaultProps" :options="subdistrictList" ref="personnelTypeChoose"></w-picker-new>
 
 		</view>
@@ -180,6 +180,9 @@
 		width: 100%;
 		padding: 15upx 15upx;
 		background-color: #FFFFFF;
+		position: absolute;
+		top: 400upx;
+		
 	}
 	
 	.itemBackView2 {

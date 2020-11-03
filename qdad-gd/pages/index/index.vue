@@ -7,7 +7,7 @@
 					<!-- <view class="cu-avatar xl round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view> -->
 					<image v-bind:src=wxHeaderImage class="cu-avatar xl round"></image>
 					<view class="mid">
-						<view @click="toSelectAdress">昵称：{{userInfo.userName}}</view>
+						<view>昵称：{{userInfo.userName}}</view>
 						<view style="display: flex;flex-direction: row;">
 							<view style="padding: 10upx 0upx;">积分：{{userInfo.integral}}</view>
 							<view @click="dhClick" style="color: #00B26A;margin-left: 10upx;padding: 10upx;border-radius: 5upx;">兑换</view>
