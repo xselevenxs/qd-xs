@@ -457,7 +457,7 @@
 	}
 
 	.mark {
-		padding: 20upx 30upx;
+		padding: 20upx 10upx;
 		height: 80upx;
 		/* background-color: #0081FF; */
 		border-radius: 10upx;
@@ -469,7 +469,7 @@
 		padding: 20upx 30upx;
 		background-color: #8DC63F;
 		border-radius: 10upx; */
-		padding: 20upx 20upx;
+		padding: 20upx 0upx;
 		color: #00B26A;
 		/* margin-left: 10upx; */
 		/* padding: 10upx; */
