@@ -31,8 +31,11 @@
 				</view>
 			</view>
 			<view class="btnView">
-				<view class="mark">已有积分：<span style="color: #0BB20C;">{{userInfo.integral}}</span>分</view>
-				<view @click="convertClick" class="convert">兑换</view>
+				<view style="display: flex;flex-direction: row;">
+					<view class="mark">已有积分：<span style="color: #0BB20C;">{{userInfo.integral}}</span>分</view>
+					<view @click="convertClick" class="convert">兑换</view>
+				</view>
+				
 				<view @click="prizeClick" class="my">我的奖品</view>
 			</view>
 			<!-- 规则 -->
@@ -462,10 +465,15 @@
 	}
 
 	.convert {
-		height: 80upx;
+		/* height: 80upx;
 		padding: 20upx 30upx;
 		background-color: #8DC63F;
-		border-radius: 10upx;
+		border-radius: 10upx; */
+		padding: 20upx 20upx;
+		color: #00B26A;
+		/* margin-left: 10upx; */
+		/* padding: 10upx; */
+		/* border-radius: 5upx; */
 	}
 
 	.my {

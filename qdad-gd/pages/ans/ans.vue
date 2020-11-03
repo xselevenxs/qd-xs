@@ -68,17 +68,23 @@
 						</view>
 						<view>
 
-							<radio-group class="block" @change="RadioboxChange" v-if="subject.type===1||subject.type===2">
+							<radio-group class="block" @change="RadioboxChange" v-if="subject.type===1">
 								<view class="cu-form-group" v-for="option in subject.optionList">
 									<radio :value="option.id" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></radio>
 									<view class="title text-black text-line-2">{{option.id}}.{{option.content}}</view>
+								</view>
+							</radio-group>
+							<radio-group class="block" @change="RadioboxChange" v-if="subject.type===2">
+								<view class="cu-form-group" v-for="option in subject.optionList">
+									<radio :value="option.id" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></radio>
+									<view class="title text-black text-line-2">{{option.content}}</view>
 								</view>
 							</radio-group>
 
 							<checkbox-group class="block" @change="CheckboxChange" v-else-if="subject.type===3">
 								<view class="cu-form-group" v-for="option in subject.optionList">
 									<checkbox :value="option.id" :class="subject.userAnswer.indexOf(option.id) > -1?'checked':''" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></checkbox>
-									<view class="title  text-black text-line-2">{{option.id}}.{{option.content}}</view>
+									<view class="title  text-black text-line-2">{{option.content}}</view>
 								</view>
 							</checkbox-group>
 
