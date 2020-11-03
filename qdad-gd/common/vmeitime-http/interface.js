@@ -107,9 +107,8 @@ export default {
 				_reslog(response)
 				if (statusCode === 200) { //成功
 					var res = response.data;
-					if (res && res.code) {
-						console.log('******************resres****'+JSON.stringify(res))
-						if (res.code == 12000) {
+					if (res && res.state_code) {
+						if (res.state_code == 400407) {
 							this._auth()
 						}
 					}
@@ -181,30 +180,12 @@ export default {
 		return (ua.match(/MicroMessenger/i) == "micromessenger");
 	},
 	_auth() {
-		var storedAppId = uni.getStorageSync('hmAppId');
-		var http = store.state.globalBaseUrl;
-		uni.request({
-			url: http + '/api/auth',
-			method: 'POST',
-			data: {
-				appId: storedAppId,
-				env: this.is_weixin() ? 'wxmp' : '',
-				state: ''
-			},
-			header: {
-				'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-			},
-			success(res) {
-				if (res.data && res.data.code == '10000') {
-					var authUrl = res.data.data.authUrl;
-
-					window.location.href = authUrl;
-				}
-			},
-			fail() {
-
-			}
-		})
+		var myAppId = store.state.myAppId
+		var myWeiXinHttp = store.state.myWeiXinHttp
+		uni.setStorageSync('nativeTokenInfo_key','second_save')
+		window.location.href =
+			"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + myAppId + "&redirect_uri=" + myWeiXinHttp +
+			"&response_type=code&scope=snsapi_userinfo#wechat_redirect";
 	}
 
 }

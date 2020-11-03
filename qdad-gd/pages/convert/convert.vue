@@ -2,10 +2,10 @@
 	<view class="container" v-bind:style="{height:screenHeight+'px'}">
 		<view class="header">
 			<view class="ticket">
-				<view class="type">洗车券</view>
-				<view class="from">由XXX提供洗车券一张</view>
-				<view class="time">有效期xxxx年xx月xx日</view>
-				<view class="btn">兑换</view>
+				<!-- <view class="type">兔师傅健康保护套餐</view>
+				<view class="from">由兔师傅提供健康保护券券一张</view>
+				<view class="time">有效期：2021年01月31日</view>
+				<view @click="convertClick" class="btn">兑换</view> -->
 			</view>
 		</view>
 		<view class="adress">
@@ -18,14 +18,37 @@
 </template>
 
 <script>
+	var that
 	export default {
 		data() {
 			return {
 				screenHeight: 0,
 			}
 		},
+		onLoad() {
+			that = this
+			uni.getSystemInfo({
+				success(res) {
+					that.screenHeight = res.windowHeight + 44;
+				}
+			});
+		},
 		methods: {
-			
+			convertClick(){
+				that.$api.getAddAward({
+					productId: '1'
+				}).then((res) => {
+					let resData = res.data
+					if(resData.state_code == '400200'){
+						that.showToast('兑换成功，请到我的奖品查看')
+					}else{
+						that.showToast(resData.state_msg)
+					}
+				
+				}).catch((err) => {
+					
+				})
+			}
 		}
 	}
 </script>
@@ -47,6 +70,7 @@
 		align-items: center;
 		background-color: #D2F1F0;
 		position: relative;
+		background-image: url(../../static/healthBH-s.png);
 	}
 	.type {
 		position: absolute;

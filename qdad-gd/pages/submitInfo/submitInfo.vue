@@ -27,29 +27,44 @@
 		mapState,
 		mapMutations
 	} from 'vuex';
+	var that
+	var awardId
 	export default {
 		computed: {
 			...mapState(['userInfo'])
 		},
 		data() {
 			return {
+				screenHeight: 0,
 				goodsName: 'iphone12',
 				info: {
 					name: '',
 					phone: '',
-					adress: ''
+					adress: '',
+					awardId: ''
 				}
 			}
 		},
+		onLoad(option) {
+			that = this
+			uni.getSystemInfo({
+				success(res) {
+					that.screenHeight = res.windowHeight + 44;
+				}
+			});
+			awardId = option.awardId
+			that.info.awardId = option.awardId
+			that.goodsName = option.name
+		},
 		methods: {
 			nameInput: function(e) {
-				that.registerInfo.name = e.detail.value
+				that.info.name = e.detail.value
 			},
 			phoneInput: function(e) {
-				that.registerInfo.name = e.detail.value
+				that.info.phone = e.detail.value
 			},
 			adressInput: function(e) {
-				that.registerInfo.name = e.detail.value
+				that.info.adress = e.detail.value
 			},
 			onSubmit() {
 				if (that.info.name.length == 0) {
@@ -65,12 +80,12 @@
 					return
 				}
 				
-				that.$api.getAwardList(that.info).then((res) => {
+				that.$api.getAddOrUpdateAddress(that.info).then((res) => {
 					let resData = res.data
 					if(resData.state_code == '400200'){
-						
+						that.showToast('提交成功')
 					}else{
-						that.showToast(resData.msg)
+						that.showToast(resData.state_msg)
 					}
 				
 				}).catch((err) => {

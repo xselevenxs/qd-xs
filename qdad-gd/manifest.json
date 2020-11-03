@@ -1,5 +1,5 @@
 {
-    "name" : "qdad-gd",
+    "name" : "答题抽奖",
     "appid" : "__UNI__C3FE2A5",
     "description" : "",
     "versionName" : "1.0.0",
@@ -50,7 +50,7 @@
     "h5" : {
         "devServer" : {
             "disableHostCheck" : true,
-            "port" : 8089,
+            "port" : 8083,
             "https" : false,
             "proxy" : {
                 "/wctest" : {

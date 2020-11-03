@@ -71,14 +71,14 @@
 							<radio-group class="block" @change="RadioboxChange" v-if="subject.type===1||subject.type===2">
 								<view class="cu-form-group" v-for="option in subject.optionList">
 									<radio :value="option.id" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></radio>
-									<view class="title text-black">{{option.id}}.{{option.content}}</view>
+									<view class="title text-black text-line-2">{{option.id}}.{{option.content}}</view>
 								</view>
 							</radio-group>
 
 							<checkbox-group class="block" @change="CheckboxChange" v-else-if="subject.type===3">
 								<view class="cu-form-group" v-for="option in subject.optionList">
 									<checkbox :value="option.id" :class="subject.userAnswer.indexOf(option.id) > -1?'checked':''" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></checkbox>
-									<view class="title  text-black">{{option.id}}.{{option.content}}</view>
+									<view class="title  text-black text-line-2">{{option.id}}.{{option.content}}</view>
 								</view>
 							</checkbox-group>
 
@@ -111,14 +111,14 @@
 									<text class="solid-bottom  padding-left text-green">{{subject.answer}}</text>
 								</view>
 							</view>
-							<view class="cu-bar cu-bar-title">
+							<!-- <view class="cu-bar cu-bar-title">
 								<view class="action  text-grey">
 									<text>解析：</text>
 								</view>
 							</view>
 							<view class="text-content padding  text-grey">
 								{{subject.explain}}
-							</view>
+							</view> -->
 						</view>
 
 					</view>
@@ -183,7 +183,7 @@
 			return {
 				curIntervalId: '',
 				curTimeoutId: '',
-				timecount: 10,
+				timecount: 20,
 				userFavor: false, //是否已收藏
 				currentType: 0, //当前题型
 				subjectIndex: 0, //跳转索引
@@ -354,7 +354,7 @@
 					if (that.curIntervalId) {
 						clearInterval(that.curIntervalId)
 					}
-					that.timecount = 10
+					that.timecount = 20
 					that.curIntervalId = setInterval(function() {
 						that.timecount--
 						if (that.timecount == 0) {
@@ -387,7 +387,7 @@
 							
 						})
 					}else{
-						that.showToast(resData.msg)
+						that.showToast(resData.state_msg)
 					}
 				
 				}).catch((err) => {
@@ -456,5 +456,13 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+	.text-line-2 {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		word-break: break-word;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		display: -webkit-box;
 	}
 </style>

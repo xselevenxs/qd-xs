@@ -1,22 +1,25 @@
 <template>
-	<view class="conbox" v-bind:style="{height:screenHeight+'px'}">
-		<view class="container">
-			<image src="/static/images/bg.png" class="cont"></image>
+	<view class="conbox">
+		<view class="container2">
+			<image src="/static/background_bg.jpg" class="cont"></image>
 			<view class="header">
 				<view class="padding-xl radius shadow bg-white info">
 					<!-- <view class="cu-avatar xl round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view> -->
 					<image v-bind:src=wxHeaderImage class="cu-avatar xl round"></image>
 					<view class="mid">
 						<view>昵称：{{userInfo.userName}}</view>
-						<view>积分：{{userInfo.integral}}</view>
+						<view style="display: flex;flex-direction: row;">
+							<view style="padding: 10upx 0upx;">积分：{{userInfo.integral}}</view>
+							<view @click="dhClick" style="color: #00B26A;margin-left: 10upx;padding: 10upx;border-radius: 5upx;">兑换</view>
+						</view>
 					</view>
-					<view class="padding-sm radius shadow bg-red">
+					<view @click="myAward" class="padding-sm radius shadow bg-red">
 						我的奖品
 					</view>
 				</view>
 			</view>
 			<view class="middle">
-				<image @click="startAns" src="../../static/startans.png" class="startans"></image>
+				<image @click="startAns" src="../../static/startAns2.png" class="startans"></image>
 			</view>
 
 
@@ -34,85 +37,105 @@
 	var that
 	export default {
 		computed: {
-			...mapState(['userInfo', 'token'])
+			...mapState(['userInfo','token'])
 		},
 		data() {
 			return {
+				screenHeight: 0,
 				nickname: '',
-				wxHeaderImage: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
+				wxHeaderImage:  'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
 			}
 		},
 		onLoad() {
 			that = this
-
+			uni.getSystemInfo({
+				success(res) {
+					that.screenHeight = res.windowHeight + 44;
+				}
+			});
 		},
 		onShow() {
-			if (that.token) {
+			if(that.token){
 				that.getUserInfo()
 			}
-
-			if (that.userInfo.headImage) {
-				that.wxHeaderImage = that.userInfo.headImage
-			}
+				
+				if(that.userInfo.headImage){
+					that.wxHeaderImage = that.userInfo.headImage
+				}
 		},
 		methods: {
+			dhClick(){
+				uni.navigateTo({
+					url: '../convert/convert'
+				})
+			},
+			myAward(){
+				
+				uni.navigateTo({
+					url: '../myAwardList/myAwardList'
+				})
+			},
 			drawClick() {
+				that.getUserInfo()
 				uni.navigateTo({
 					url: '../activity/draw'
 				})
 			},
-			startAns() {
-				if (that.userInfo.isAnswer == '0' || that.userInfo.isAnswer == 0) {
-					that.$api.getTikuListRandom({}).then((res) => {
+			startAns(){
+				that.getUserInfo()
+				if(that.userInfo.isAnswer == '0' || that.userInfo.isAnswer == 0){
+					that.$api.getTikuListRandom({
+					}).then((res) => {
 						let resData = res.data
-						if (resData.state_code == '400200') {
-							that.$store.commit('setAnsList', resData.data)
+						if(resData.state_code == '400200'){
+							that.$store.commit('setAnsList',resData.data)
 							uni.navigateTo({
 								url: '../ans/ans'
 							})
-						} else {
-							that.showToast(resData.msg)
+						}else{
+							that.showToast(resData.state_msg)
 						}
-
+					
 					}).catch((err) => {
-
+						
 					})
-				} else {
+				}else{
 					that.showToast('您今日已答题，每人每天仅能答题一次')
 				}
-
+				
 			},
-			getUserInfo() { //
-				that.$api.getLoginUserInfo({}).then((res) => {
+			getUserInfo(){//
+				that.$api.getLoginUserInfo({
+				}).then((res) => {
 					let resData = res.data
-					if (resData.state_code == '400200') {
+					if(resData.state_code == '400200'){
 						that.$store.commit('setUserInfo', resData.data)
-					} else {
-
+					}else{
+						
 					}
-
+				
 				}).catch((err) => {
-
+					
 				})
 			},
-			getMobileLogin() {
+			getMobileLogin(){
 				that.$api.getMobileLogin({
 					mobile: '17091008732'
 				}).then((res) => {
 					let resData = res.data
-					if (resData.state_code == '400200') {
+					if(resData.state_code == '400200'){
 						uni.setStorage({
 							key: "nativeTokenInfo_key",
 							data: resData.data.access_token,
 						})
-						that.$store.commit('setToken', resData.data.access_token)
+						that.$store.commit('setToken',resData.data.access_token)
 						that.getUserInfo()
-					} else {
+					}else{
 						that.showToast(resData.state_msg)
 					}
-
+				
 				}).catch((err) => {
-
+					
 				})
 			}
 		}
@@ -127,7 +150,7 @@
 		overflow-y: scroll;
 	}
 
-	.container,
+	.container2,
 	image.cont {
 		width: 750upx;
 		min-height: 100vh;

@@ -2,7 +2,7 @@
 	"pages": [{
 		"path": "pages/index/index",
 		"style": {
-			"navigationBarTitleText": "uni-ui基础项目"
+			"navigationBarTitleText": "答题抽奖"
 		}
 	}, {
 		"path": "pages/activity/draw",
@@ -12,7 +12,7 @@
 	}, {
 		"path": "pages/submitInfo/submitInfo",
 		"style": {
-			"navigationBarTitleText": "",
+			"navigationBarTitleText": "提交",
 			"enablePullDownRefresh": false
 		}
 
@@ -20,7 +20,7 @@
             "path" : "pages/convert/convert",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "兑换",
                 "enablePullDownRefresh": false
             }
             
@@ -38,7 +38,7 @@
             "path" : "pages/myAwardList/myAwardList",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "我的奖品",
                 "enablePullDownRefresh": false
             }
             
@@ -47,7 +47,7 @@
             "path" : "pages/virtualGoodsDetail/virtualGoodsDetail",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "详情",
                 "enablePullDownRefresh": false
             }
             

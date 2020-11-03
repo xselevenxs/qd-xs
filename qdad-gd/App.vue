@@ -11,20 +11,16 @@
 
 
 			if (that.is_weixin()) {
-				return
 				var nativeToken = uni.getStorageSync('nativeTokenInfo_key')
-				console.log('************nativeToken**res33=' + JSON.stringify(uni.getStorageSync('nativeTokenInfo_key')))
 				if (nativeToken) {
 
 				} else {
-					console.log('************nativeToken**res33=' + JSON.stringify(uni.getStorageSync('nativeTokenInfo_key')))
 					uni.setStorageSync('nativeTokenInfo_key', 'first_save')
 				}
 				
 				uni.getStorage({
 					key: "nativeTokenInfo_key",
 					success(storageRes) {
-						console.log('**************nativeTokenInfo_key**res=' + JSON.stringify(storageRes))
 						if (storageRes.data == 'first_save') {
 							uni.setStorageSync('nativeTokenInfo_key','second_save')
 							window.location.href =
@@ -37,7 +33,6 @@
 								netCode = that.getParam('code');
 							}
 
-							console.log('******************333****' + JSON.stringify(netCode))
 							if (netCode) {
 								uni.request({
 									url: that.$store.state.serviceUrl + '/weChart/authorization',
@@ -71,6 +66,7 @@
 							}
 
 						} else {
+							that.$store.commit('setToken', storageRes.data)
 							that.getUserInfo(storageRes.data)
 						}
 					},
@@ -128,7 +124,7 @@
 								"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + myAppId + "&redirect_uri=" + myWeiXinHttp +
 								"&response_type=code&scope=snsapi_userinfo#wechat_redirect";
 						} else {
-
+							that.showToast(resData.state_msg)
 						}
 
 					},

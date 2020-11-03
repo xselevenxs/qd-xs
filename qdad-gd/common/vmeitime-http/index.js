@@ -118,7 +118,67 @@ export const getAwardList = (data) => {
 		return response;
 	}
 	return http.request({
-		url: '/award/list ',
+		url: '/award/list',
+		dataType: 'json',
+		data,
+	})
+}
+//开始抽奖
+export const getProductPrizeStartProductPrize = (data) => {
+
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+
+		//判断返回状态 执行相应操作
+		return response;
+	}
+	return http.request({
+		url: '/productPrize/startProductPrize',
+		dataType: 'json',
+		data,
+	})
+}
+//添加地址
+export const getAddOrUpdateAddress = (data) => {
+
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+
+		//判断返回状态 执行相应操作
+		return response;
+	}
+	return http.request({
+		url: '/address/addOrUpdateAddress',
+		dataType: 'json',
+		data,
+	})
+}
+//兑换商品
+export const getAddAward = (data) => {
+
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+
+		//判断返回状态 执行相应操作
+		return response;
+	}
+	return http.request({
+		url: '/award/addAward',
+		dataType: 'json',
+		data,
+	})
+}
+//详情商品
+export const getAwardById = (data) => {
+
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+
+		//判断返回状态 执行相应操作
+		return response;
+	}
+	return http.request({
+		url: '/award/getById',
 		dataType: 'json',
 		data,
 	})
@@ -143,5 +203,9 @@ export default {
 	getTikuListRandom,
 	getAnswerDetailAddOrUpdateAward,
 	getAwardList,
+	getProductPrizeStartProductPrize,
+	getAddOrUpdateAddress,
+	getAddAward,
+	getAwardById,
 	banner
 }

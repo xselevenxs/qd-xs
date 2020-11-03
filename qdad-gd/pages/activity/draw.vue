@@ -16,19 +16,23 @@
 							<view class="canvas-item" :style="{transform: 'rotate('+(index * width)+'deg)', zIndex:index, }" v-for="(iteml,index) in list"
 							 :key="index">
 								<view class="canvas-item-text" :style="'transform:rotate('+(index )+')'">
-									<text class="b" style="font-size: 32upx;">{{iteml.name}}</text>
-									<text class="icon-awrad iconfont " :class="iteml.icon"></text>
+									<text class="b" style="font-size: 25upx;">{{iteml.name}}</text>
+									<image v-if="iteml.value == '1'" src="../../static/huiweiM40-s.jpg" style="width: 80upx;height: 80upx;margin-top: 20upx;"></image>
+									<image v-if="iteml.value == '3'" src="../../static/dianyiing-s.png" style="width: 120upx;height: 80upx;margin-top: 20upx;"></image>
+									<image v-if="iteml.value == '5'" src="../../static/baoyang-s.png" style="width: 120upx;height: 80upx;margin-top: 20upx;"></image>
+									<image v-if="iteml.value == '6'" src="../../static/healthBH-s.png" style="width: 120upx;height: 80upx;margin-top: 20upx;"></image>
+									<!-- <text class="icon-awrad iconfont " :class="iteml.icon"></text> -->
 								</view>
 							</view>
 						</view>
 					</view>
 
-					<view @tap="playReward" class="canvas-btn" v-bind:class="btnDisabled">开始 </view>
+					<view @tap="getDrawDetail" class="canvas-btn" v-bind:class="btnDisabled">开始 </view>
 				</view>
 			</view>
 			<view class="btnView">
-				<view class="mark">已有积分：{{userInfo.integral}}分</view>
-				<view @click="convertClick" class="convert">兑换洗车劵</view>
+				<view class="mark">已有积分：<span style="color: #0BB20C;">{{userInfo.integral}}</span>分</view>
+				<view @click="convertClick" class="convert">兑换保护劵</view>
 				<view @click="prizeClick" class="my">我的奖品</view>
 			</view>
 			<!-- 规则 -->
@@ -53,6 +57,7 @@
 		mapState,
 		mapMutations
 	} from 'vuex';
+	var that
 	export default {
 		computed: {
 			...mapState(['userInfo'])
@@ -60,50 +65,55 @@
 		data() {
 			return {
 				list: [{
-						"name": "4折",
+						"name": "华为40 Pro",
+						"value": "1",
+						icon: 'icondazhe text-danger',
+					},
+					{
+						"name": "韩国多功能四方锅",
+						"value": "2",
+						icon: 'icondazhe text-danger',
+					},
+					{
+						"name": "电影券",
+						"value": "3",
+						icon: 'icondazhe text-danger',
+					},
+					{
+						"name": "小型垃圾桶",
 						"value": "4",
 						icon: 'icondazhe text-danger',
 					},
 					{
-						"name": "5折",
+						"name": "兔师傅保养套餐",
 						"value": "5",
 						icon: 'icondazhe text-danger',
 					},
 					{
-						"name": "6折",
+						"name": "兔师傅保护套餐",
 						"value": "6",
 						icon: 'icondazhe text-danger',
-					},
-					{
-						"name": "7折",
-						"value": "7",
-						icon: 'icondazhe text-danger',
-					},
-					{
-						"name": "8折",
-						"value": "8",
-						icon: 'icondazhe text-danger',
-					},
-					{
-						"name": "9折",
-						"value": "9",
-						icon: 'icondazhe text-danger',
-					},
-					{
-						"name": "感谢参与",
-						"value": "10",
-						icon: 'iconfangqi1 text-master',
-						isNoPrize: true, // 是否未中奖
-					},
+					}
 				],
 				width: 0,
 				animationData: {},
-				btnDisabled: '',
+				btnDisabled: 'disabled',
+				awardInfo: {}
 			}
 		},
 		onLoad: function() {
+			that = this
 			// 获取奖品列表
 			this.width = 360 / this.list.length
+			
+		},
+		onShow() {
+			if(that.userInfo.integral > 20){
+				this.btnDisabled = '';
+			}else{
+				this.btnDisabled = 'disabled';
+				that.showToast('积分不足无法抽奖')
+			}
 		},
 		methods: {
 			convertClick(){
@@ -139,19 +149,62 @@
 
 			},
 			//发起抽奖
-			playReward() {
-				let index = 8,
+			playReward(flag) {
+				let index = flag-1,
 					duration = 4000
+					console.log('*********************index*'+JSON.stringify(index))
 				this.animation(index, duration)
 
 				setTimeout(() => {
-					uni.showModal({
-						content: this.list[index].isNoPrize ? '抱歉，您未中奖' : '恭喜，中奖'
-					})
+					// uni.showModal({
+					// 	content: this.list[index].isNoPrize ? '抱歉，您未中奖' : '恭喜，中奖'
+					// })
 					this.btnDisabled = '';
+					that.getUserInfo()
 					// document.getElementById('zhuanpano').style=''
+					uni.showModal({
+					    title: '中奖',
+					    content: '恭喜您获得'+that.awardInfo.name,
+					    success: function (res) {
+					        if (res.confirm) {
+					            console.log('用户点击确定');
+					        } else if (res.cancel) {
+					            console.log('用户点击取消');
+					        }
+					    }
+					});
 				}, duration + 1000)
 
+			},
+			getDrawDetail(){
+				that.$api.getProductPrizeStartProductPrize({}).then((res) => {
+					let resData = res.data
+					if(resData.state_code == '400200'){
+						that.awardInfo = resData.data
+						let index = resData.data.id
+						console.log('*********************resData.id*'+JSON.stringify(index))
+						that.playReward(index)
+					}else{
+						that.showToast(resData.state_msg)
+					}
+				
+				}).catch((err) => {
+					
+				})
+			},
+			getUserInfo(){//
+				that.$api.getLoginUserInfo({
+				}).then((res) => {
+					let resData = res.data
+					if(resData.state_code == '400200'){
+						that.$store.commit('setUserInfo', resData.data)
+					}else{
+						
+					}
+				
+				}).catch((err) => {
+					
+				})
 			},
 
 		}
@@ -403,21 +456,22 @@
 	.mark {
 		padding: 20upx 30upx;
 		height: 80upx;
-		background-color: #0081FF;
+		/* background-color: #0081FF; */
 		border-radius: 10upx;
+		color: #999999;
 	}
 
 	.convert {
 		height: 80upx;
 		padding: 20upx 30upx;
-		background-color: #0081FF;
+		background-color: #8DC63F;
 		border-radius: 10upx;
 	}
 
 	.my {
 		height: 80upx;
 		padding: 20upx 30upx;
-		background-color: #0081FF;
+		background-color: #E44025;
 		border-radius: 10upx;
 	}
 </style>
