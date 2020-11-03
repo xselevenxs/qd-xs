@@ -375,7 +375,9 @@
 				}
 			},
 			answerToService(){
-				
+				if (that.curIntervalId) {
+					clearInterval(that.curIntervalId)
+				}
 				let ansY = 0;
 				for(let i=0;i<that.subjectList.length;i++){
 					let item = that.subjectList[i]
