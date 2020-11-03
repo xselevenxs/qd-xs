@@ -3,7 +3,13 @@
 		<view class="container2">
 			<image src="/static/q-bg.jpg" class="cont"></image>
 			<view class="itemBackView" @click="townAddressChoose">
+				<image src="../../static/biankuang.png" style="width: 100%; height: 100%;"></image>
 				<!-- <view class="leftClass">街道</view> -->
+				<view class="mesClass">
+					<view>填写街道仅用于统计功能</view>
+					<view>您只需填写一次</view>
+				</view>
+				
 				<input type="text" placeholder-class="adressPlasce" placeholder="点击选择街道" disabled="true" :value="townAddress" class="inputClass2" />
 				<!-- <image class="rightSelectImage" src="/static/show_more.png"></image> -->
 			</view>
@@ -179,12 +185,33 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		width: 100%;
+		width: 700upx;
+		height: 250upx;
 		padding: 15upx 15upx;
-		/* background-color: #FFFFFF; */
+		/* background-color: #0081FF; */
 		position: absolute;
-		bottom: 600upx;
-		
+		bottom: 500upx;
+		left: 25upx;
+	}
+	.mesClass {
+		position: absolute;
+		top: 40upx;
+		left: 75upx;
+		font-size: 30upx;
+		color: #D89720;
+	}
+	.inputClass2 {
+		border: 1upx solid #C9C9C9;
+		width: 550upx;
+		border-radius: 10upx;
+		padding: 10upx;
+		height: 60upx;
+		color: #FFFFFF;
+		background-color: #F8F8F8;
+		margin: 0upx auto;
+		position: absolute;
+		bottom: 40upx;
+		left: 75upx;
 	}
 	
 	.itemBackView2 {
@@ -209,16 +236,7 @@
 		height: 60upx;
 	}
 	
-	.inputClass2 {
-		border-bottom: 1upx solid #C9C9C9;
-		width: 71%;
-		border-radius: 10upx;
-		padding: 10upx;
-		height: 60upx;
-		color: #FFFFFF;
-		background-color: #F8F8F8;
-		margin: 0upx auto;
-	}
+	
 	.adressPlasce{
 		color: #C9C9C9;
 	}

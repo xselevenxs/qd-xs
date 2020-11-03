@@ -11,11 +11,11 @@
 			</view>
 			<view class="itemBackView">
 				<view class="leftClass">电话</view>
-				<input @input="phoneInput" :value="info.phone" class="inputClass" placeholder="请输入电话" />
+				<input @input="phoneInput" :value="info.tel" class="inputClass" placeholder="请输入电话" />
 			</view>
 			<view class="itemBackView">
 				<view class="leftClass">地址</view>
-				<input @input="adressInput" :value="info.adress" class="inputClass" placeholder="请输入地址" />
+				<input @input="adressInput" :value="info.address" class="inputClass" placeholder="请输入地址" />
 			</view>
 		</view>
 		<view class="primaryText submitBtn" @click="onSubmit">提交</view>
@@ -36,11 +36,11 @@
 		data() {
 			return {
 				screenHeight: 0,
-				goodsName: 'iphone12',
+				goodsName: '',
 				info: {
 					name: '',
-					phone: '',
-					adress: '',
+					tel: '',
+					address: '',
 					awardId: ''
 				}
 			}
@@ -61,21 +61,21 @@
 				that.info.name = e.detail.value
 			},
 			phoneInput: function(e) {
-				that.info.phone = e.detail.value
+				that.info.tel = e.detail.value
 			},
 			adressInput: function(e) {
-				that.info.adress = e.detail.value
+				that.info.address = e.detail.value
 			},
 			onSubmit() {
 				if (that.info.name.length == 0) {
 					that.showToast('请输入姓名')
 					return
 				}
-				if (that.info.phone.length == 0) {
+				if (that.info.tel.length == 0) {
 					that.showToast('请输入电话')
 					return
 				}
-				if (that.info.adress.length == 0) {
+				if (that.info.address.length == 0) {
 					that.showToast('请输入地址')
 					return
 				}
