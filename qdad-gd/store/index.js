@@ -10,6 +10,7 @@ const state = new Vuex.Store({
 		token: '',
 		myAppId: "wx86a1e0f53265f9f7",
 		myWeiXinHttp: "http%3A%2F%2Fxs-dev.grip8.com",
+		wxHeaderImage: '/static/headerdefault.png',
 		userInfo: {},
 		ansList: []
 	},
@@ -23,6 +24,9 @@ const state = new Vuex.Store({
 		setAnsList(state,res){
 			state.ansList = res
 		},
+		setwxHeaderImage(state,res){
+			state.wxHeaderImage = res
+		}
 	}
 })
 export default state 

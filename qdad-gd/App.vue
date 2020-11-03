@@ -112,6 +112,7 @@
 						if (resData.state_code == '400200') {
 
 							that.$store.commit('setUserInfo', resData.data)
+							that.$store.commit('setwxHeaderImage',resData.data.headImage)
 						} else if (resData.state_code == '400407') {
 							uni.setStorage({
 								key: "nativeTokenInfo_key",

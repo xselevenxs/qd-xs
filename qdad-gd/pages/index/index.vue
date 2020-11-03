@@ -38,13 +38,12 @@
 	var that
 	export default {
 		computed: {
-			...mapState(['userInfo','token'])
+			...mapState(['userInfo','token','wxHeaderImage'])
 		},
 		data() {
 			return {
 				screenHeight: 0,
 				nickname: '',
-				wxHeaderImage:  '/static/headerdefault.png'
 			}
 		},
 		onLoad() {
@@ -59,10 +58,7 @@
 			if(that.token){
 				that.getUserInfo()
 			}
-				
-				if(that.userInfo.headImage){
-					that.wxHeaderImage = that.userInfo.headImage
-				}
+			// headImage
 		},
 		methods: {
 			toSelectAdress(){
@@ -116,6 +112,7 @@
 					let resData = res.data
 					if(resData.state_code == '400200'){
 						that.$store.commit('setUserInfo', resData.data)
+						that.$store.commit('setwxHeaderImage',resData.data.headImage)
 					}else{
 						
 					}
