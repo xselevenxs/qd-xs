@@ -63,7 +63,7 @@
 				}else{
 					if(item.hasAddress == '0'){
 						uni.navigateTo({
-							url: '../submitInfo/submitInfo?awardId=' + item.id+'&name=' + item.productName
+							url: '../submitInfo/submitInfo?awardId=' + item.id+'&name=' + item.productName+'&typeId=' + item.productId
 						})
 					}else{
 						that.showToast('您的奖品我们将在3-5个工作日安排寄出')

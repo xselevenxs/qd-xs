@@ -183,6 +183,36 @@ export const getAwardById = (data) => {
 		data,
 	})
 }
+//行政区
+export const getAreaDate = (data) => {
+
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+
+		//判断返回状态 执行相应操作
+		return response;
+	}
+	return http.request({
+		url: '/area/getAreaDate',
+		dataType: 'json',
+		data,
+	})
+}
+//行政区增加
+export const getAddOrUpdateUser = (data) => {
+
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+
+		//判断返回状态 执行相应操作
+		return response;
+	}
+	return http.request({
+		url: '/user/addOrUpdateUser',
+		dataType: 'json',
+		data,
+	})
+}
 // 轮播图   
 export const banner = (data) => {
 	return http.request({
@@ -207,5 +237,7 @@ export default {
 	getAddOrUpdateAddress,
 	getAddAward,
 	getAwardById,
+	getAreaDate,
+	getAddOrUpdateUser,
 	banner
 }

@@ -1,6 +1,11 @@
 <template>
 	<view class="container" v-bind:style="{height:screenHeight+'px'}">
-		<image src="../../static/car.jpeg" class="img"></image>
+		<!-- <image src="../../static/car.jpeg" class="img"></image> -->
+		<view class="header">
+			<view class="ticket">
+				<image :src="headerGoodsImage" style="width: 100%;height: 100%;"></image>
+			</view>
+		</view>
 		<view class="mesBack">
 			<text>恭喜{{userInfo.userName}}获得<span class="goods">{{goodsName}}</span>请填写个人信息，奖品会在3-5个工作日内安排寄出，<span class="nosubmit">未填写个人信息代表您放弃领奖。</span></text>
 		</view>
@@ -37,6 +42,8 @@
 			return {
 				screenHeight: 0,
 				goodsName: '',
+				typeId: '',
+				headerGoodsImage: '/static/baohu-m.png',
 				info: {
 					name: '',
 					tel: '',
@@ -55,6 +62,26 @@
 			awardId = option.awardId
 			that.info.awardId = option.awardId
 			that.goodsName = option.name
+			that.typeId = option.typeId
+			
+			if(that.typeId == '1'){
+				that.headerGoodsImage = '/static/baohu-m.png'
+			}
+			if(that.typeId == '2'){
+				that.headerGoodsImage = '/static/baohu-m.png'
+			}
+			if(that.typeId == '3'){
+				that.headerGoodsImage = '/static/baohu-m.png'
+			}
+			if(that.typeId == '4'){
+				that.headerGoodsImage = '/static/baohu-m.png'
+			}
+			if(that.typeId == '5'){
+				that.headerGoodsImage = '/static/baohu-m.png'
+			}
+			if(that.typeId == '6'){
+				that.headerGoodsImage = '/static/baohu-m.png'
+			}
 		},
 		methods: {
 			nameInput: function(e) {
@@ -98,6 +125,22 @@
 </script>
 
 <style>
+	.header {
+			width: 100%;
+			height: 400upx;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 30upx;
+		}
+		.ticket {
+			width: 700upx;
+			height: 370upx;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			position: relative;
+		}
 	.img {
 		width: 100%;
 		height: 400upx;

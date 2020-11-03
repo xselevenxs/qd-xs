@@ -58,7 +58,13 @@
 			if(that.token){
 				that.getUserInfo()
 			}
-			// headImage
+			// if(that.userInfo) {
+			// 	if(!that.userInfo.streetName){
+			// 		uni.navigateTo({
+			// 			url: '../selectAdress/selectAdress'
+			// 		})
+			// 	}
+			// }
 		},
 		methods: {
 			toSelectAdress(){

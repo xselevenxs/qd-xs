@@ -2,16 +2,19 @@
 	<view class="conbox">
 		<view class="container2">
 			<image src="/static/q-bg.jpg" class="cont"></image>
-			<view class="itemBackView" @click="townAddressChoose">
+			<view class="itemBackView" >
 				<image src="../../static/biankuang.png" style="width: 100%; height: 100%;"></image>
 				<!-- <view class="leftClass">街道</view> -->
-				<view class="mesClass">
+				<view @click="townAddressChoose" class="mesClass">
 					<view>填写街道仅用于统计功能</view>
 					<view>您只需填写一次</view>
 				</view>
+				<view @click="townAddressChoose">
+					<input type="text" placeholder-class="adressPlasce" placeholder="点击选择街道" disabled="true" :value="townAddress" class="inputClass2" />
+				</view>
 				
-				<input type="text" placeholder-class="adressPlasce" placeholder="点击选择街道" disabled="true" :value="townAddress" class="inputClass2" />
 				<!-- <image class="rightSelectImage" src="/static/show_more.png"></image> -->
+				<view @click="getAddOrUpdateUser" class="mitBtn">提交</view>
 			</view>
 			
 		
@@ -49,6 +52,7 @@
 					that.screenHeight = res.windowHeight + 44;
 				}
 			});
+			that.getAreaDate()
 		},
 		onShow() {
 
@@ -59,13 +63,24 @@
 			},
 			townAddressChoose() {
 				// 点击地址触发事件
-				that.townAddressVisible = true
+				if(that.subdistrictList.length > 0){
+					that.townAddressVisible = true
+				}else{
+					that.getAreaDate()
+				}
+				
 			},
-			getUserInfo() { //
-				that.$api.getLoginUserInfo({}).then((res) => {
+			getAddOrUpdateUser() { //
+				that.$api.getAddOrUpdateUser({
+					cityCode: '',
+					districtCode: '',
+					streetName: that.townAddress
+				}).then((res) => {
 					let resData = res.data
 					if (resData.state_code == '400200') {
-						that.$store.commit('setUserInfo', resData.data)
+						uni.navigateBack({
+							
+						})
 					} else {
 
 					}
@@ -74,18 +89,12 @@
 
 				})
 			},
-			getMobileLogin() {
-				that.$api.getMobileLogin({
-					mobile: '17091008732'
+			getAreaDate() {
+				that.$api.getAreaDate({
 				}).then((res) => {
 					let resData = res.data
 					if (resData.state_code == '400200') {
-						uni.setStorage({
-							key: "nativeTokenInfo_key",
-							data: resData.data.access_token,
-						})
-						that.$store.commit('setToken', resData.data.access_token)
-						that.getUserInfo()
+						that.subdistrictList = resData.data
 					} else {
 						that.showToast(resData.state_msg)
 					}
@@ -202,9 +211,9 @@
 	}
 	.inputClass2 {
 		border: 1upx solid #C9C9C9;
-		width: 550upx;
+		width: 450upx;
 		border-radius: 10upx;
-		padding: 10upx;
+		padding: 20upx;
 		height: 60upx;
 		color: #FFFFFF;
 		background-color: #F8F8F8;
@@ -213,7 +222,19 @@
 		bottom: 40upx;
 		left: 75upx;
 	}
-	
+	.adressPlasce{
+		color: #C9C9C9;
+		font-size: 30upx;
+	}
+	.mitBtn{
+		position: absolute;
+		bottom: 40upx;
+		right: 75upx;
+		padding: 10upx 20upx;
+		border-radius: 10upx;
+		background-color: #09BB07;
+		color: #FFFFFF;
+	}
 	.itemBackView2 {
 		display: flex;
 		flex-direction: row;
@@ -237,9 +258,7 @@
 	}
 	
 	
-	.adressPlasce{
-		color: #C9C9C9;
-	}
+	
 	.pickerSelect {
 		border-bottom: 1upx solid #C9C9C9;
 		width: 68%;
