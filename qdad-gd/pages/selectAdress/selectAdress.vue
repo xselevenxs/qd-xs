@@ -3,10 +3,12 @@
 		<view class="container2">
 			<image src="/static/q-bg.jpg" class="cont"></image>
 			<view class="itemBackView" @click="townAddressChoose">
-				<view class="leftClass">街道</view>
-				<input type="text" placeholder="点击选择街道" disabled="true" :value="townAddress" class="inputClass2" />
-				<image class="rightSelectImage" src="/static/show_more.png"></image>
+				<!-- <view class="leftClass">街道</view> -->
+				<input type="text" placeholder-class="adressPlasce" placeholder="点击选择街道" disabled="true" :value="townAddress" class="inputClass2" />
+				<!-- <image class="rightSelectImage" src="/static/show_more.png"></image> -->
 			</view>
+			
+		
 		<!-- 镇 -->
 		<w-picker-new :visible.sync="townAddressVisible" :value="townAddress" mode="selector" @confirm="onTownAddressConfirm"
 		 default-type="title" :default-props="defaultProps" :options="subdistrictList" ref="personnelTypeChoose"></w-picker-new>
@@ -179,9 +181,9 @@
 		align-items: center;
 		width: 100%;
 		padding: 15upx 15upx;
-		background-color: #FFFFFF;
+		/* background-color: #FFFFFF; */
 		position: absolute;
-		bottom: 400upx;
+		bottom: 600upx;
 		
 	}
 	
@@ -213,8 +215,13 @@
 		border-radius: 10upx;
 		padding: 10upx;
 		height: 60upx;
+		color: #FFFFFF;
+		background-color: #F8F8F8;
+		margin: 0upx auto;
 	}
-	
+	.adressPlasce{
+		color: #C9C9C9;
+	}
 	.pickerSelect {
 		border-bottom: 1upx solid #C9C9C9;
 		width: 68%;
