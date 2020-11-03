@@ -383,15 +383,29 @@
 						ansY = ansY + 1
 					}
 				}
+				var er = 10-ansY
 				console.log('**********************ansY'+JSON.stringify(ansY))
 				that.$api.getAnswerDetailAddOrUpdateAward({
 					integral: ansY
 				}).then((res) => {
 					let resData = res.data
 					if(resData.state_code == '400200'){
-						uni.navigateBack({
-							
-						})
+						
+						uni.showModal({
+						    title: '提示',
+						    content: '答对'+ ansY + '题,答错' + er + '题。',
+						    success: function (res) {
+						        if (res.confirm) {
+						           uni.navigateBack({
+						           	
+						           })
+						        } else if (res.cancel) {
+						            uni.navigateBack({
+						            	
+						            })
+						        }
+						    }
+						});
 					}else{
 						that.showToast(resData.state_msg)
 					}
