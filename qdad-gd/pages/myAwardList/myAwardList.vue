@@ -2,12 +2,12 @@
 	<view class="container" v-bind:style="{height:screenHeight+'px'}">
 		<view v-for="(item,index) in awardList" :key="index" >
 			<view class="item" @click="itemClick(item)">
-				<image class="img" v-if="item.productId == '1'" mode="aspectFit" src="/static/daijinquan.jpg"></image>
-				<image class="img" v-if="item.productId == '2'" mode="aspectFit" src="../../static/iphone12.jpeg"></image>
-				<image class="img" v-if="item.productId == '3'" mode="aspectFit" src="../../static/lipinquan.jpg"></image>
+				<image class="img" v-if="item.productId == '1'" mode="aspectFit" src="/static/huiweiM40-s.jpg"></image>
+				<image class="img" v-if="item.productId == '2'" mode="aspectFit" src="/static/huiweiM40-s.jpeg"></image>
+				<image class="img" v-if="item.productId == '3'" mode="aspectFit" src="/static/dianyiing-s.png"></image>
 				<image class="img" v-if="item.productId == '4'" mode="aspectFit" src="/static/daijinquan.jpg"></image>
-				<image class="img" v-if="item.productId == '5'" mode="aspectFit" src="../../static/iphone12.jpeg"></image>
-				<image class="img" v-if="item.productId == '6'" mode="aspectFit" src="../../static/lipinquan.jpg"></image>
+				<image class="img" v-if="item.productId == '5'" mode="aspectFit" src="/static/baoyang-s.png"></image>
+				<image class="img" v-if="item.productId == '6'" mode="aspectFit" src="/static/healthBH-s.png"></image>
 				<view class="middle">
 					<view class="type">{{item.productName}}</view>
 					<view v-if="item.productType == 1">有效期：2021-01-31</view>

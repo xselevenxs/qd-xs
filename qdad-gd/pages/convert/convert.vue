@@ -9,7 +9,7 @@
 				<image src="../../static/baohu-m.png" style="width: 100%;height: 100%;"></image>
 			</view>
 		</view>
-		<view @click="convertClick" class="btn">兑换</view>
+		<view @click="convertClick" class="btn">兑换(消耗20积分)</view>
 		<view class="adress">
 			<view>门店地址：</view>
 			<view>XXXX店</view>
