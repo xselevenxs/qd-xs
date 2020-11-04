@@ -2,7 +2,7 @@
 	"pages": [{
 		"path": "pages/index/index",
 		"style": {
-			"navigationBarTitleText": "答题抽奖"
+			"navigationBarTitleText": "青岛市垃圾分类知识竞赛"
 		}
 	}, {
 		"path": "pages/activity/draw",
