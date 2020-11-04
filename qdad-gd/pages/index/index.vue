@@ -1,7 +1,8 @@
 <template>
 	<view class="conbox">
 		<view class="container2">
-			<image src="/static/glable-bgconfirm.jpg" class="cont"></image>
+			<!-- <image src="/static/glable-bgconfirm.jpg" class="cont"></image> -->
+			<image src="/static/q-bg.jpg" class="cont"></image>
 			<view class="header">
 				<view class="padding-xl radius shadow bg-white info">
 					<!-- <view class="cu-avatar xl round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view> -->
@@ -19,7 +20,7 @@
 				</view>
 			</view>
 			<view class="middle">
-				<image src="../../static/titliecontent.jpeg" class="titliecontent"></image>
+				<!-- <image src="../../static/titliecontent.jpeg" class="titliecontent"></image> -->
 				<!-- <image @click="startAns" src="../../static/startAns2.png" class="startans"></image> -->
 				<image @click="startAns" src="../../static/anss.png" class="startans"></image>
 				<image @click="drawClick" src="../../static/drawss.png" class="draws"></image>

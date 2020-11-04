@@ -4,18 +4,23 @@
 			<view class="ticket">
 				<!-- <view class="type">兔师傅健康保护套餐</view>
 				<view class="from">由兔师傅提供健康保护券券一张</view>
-				<view class="time">有效期：2021年01月31日</view>
+				<view class="time">有效期：2021年01月31日</view>baohu-m
 				<view @click="convertClick" class="btn">兑换</view> -->
-				<image src="../../static/baohu-m.png" style="width: 100%;height: 100%;"></image>
+				<image src="../../static/tsfbhtt.png" style="width: 100%;height: 100%;"></image>
 			</view>
 		</view>
 		<view @click="convertClick" class="btn">兑换(消耗20积分)</view>
-		<view class="adress">
+		<view class="header" style="margin-top: 30upx;">
+			<view class="ticket">
+				<image src="../../static/mddz2.png" style="width: 100%;height: 100%;"></image>
+			</view>
+		</view>
+		<!-- <view class="adress">
 			<view>门店地址：</view>
 			<view>XXXX店</view>
 			<view>营业时间：8：00-16：00</view>
 			<view>使用方式</view>
-		</view>
+		</view> -->
 	</view>
 </template>
 

@@ -2,25 +2,31 @@
 	<view class="conbox">
 		<view class="container2">
 			<image src="/static/q-bg.jpg" class="cont"></image>
-			<view class="itemBackView" >
+			<view class="itemBackView">
 				<image src="../../static/biankuang.png" style="width: 100%; height: 100%;"></image>
 				<!-- <view class="leftClass">街道</view> -->
 				<view @click="townAddressChoose" class="mesClass">
 					<view>填写街道仅用于统计功能</view>
 					<view>您只需填写一次</view>
 				</view>
-				<view @click="townAddressChoose">
-					<input type="text" placeholder-class="adressPlasce" placeholder="点击选择街道" disabled="true" :value="townAddress" class="inputClass2" />
+				<view @click="areaChoose">
+					<input type="text" placeholder-class="adressPlasce" placeholder="点击选择区" disabled="true" :value="area" class="inputClass2" />
 				</view>
-				
+				<view @click="townAddressChoose">
+					<input type="text" placeholder-class="adressPlasce" placeholder="点击选择街道" disabled="true" :value="townAddress"
+					 class="inputClass3" />
+				</view>
+
 				<!-- <image class="rightSelectImage" src="/static/show_more.png"></image> -->
 				<view @click="getAddOrUpdateUser" class="mitBtn">提交</view>
 			</view>
-			
-		
-		<!-- 镇 -->
-		<w-picker-new :visible.sync="townAddressVisible" :value="townAddress" mode="selector" @confirm="onTownAddressConfirm"
-		 default-type="title" :default-props="defaultProps" :options="subdistrictList" ref="personnelTypeChoose"></w-picker-new>
+
+			<!-- 区 -->
+			<w-picker-new :visible.sync="areaVisible" :value="area" mode="selector" @confirm="areaConfirm" default-type="name"
+			 :default-props="defaultProps" :options="areaList" ref="personnelTypeChoose"></w-picker-new>
+			<!-- 镇 -->
+			<w-picker-new :visible.sync="townAddressVisible" :value="townAddress" mode="selector" @confirm="onTownAddressConfirm"
+			 default-type="title" :default-props="defaultProps" :options="subdistrictList" ref="personnelTypeChoose"></w-picker-new>
 
 		</view>
 	</view>
@@ -39,10 +45,15 @@
 				townAddressVisible: false,
 				townAddress: '',
 				defaultProps: {
-					label: 'title',
-					value: 'id'
+					label: 'name',
+					value: 'adcode'
 				},
 				subdistrictList: [],
+				areaList: [],
+				areaVisible: false,
+				area: '',
+				cityCode: '',
+				districtCode: ''
 			}
 		},
 		onLoad() {
@@ -58,28 +69,74 @@
 
 		},
 		methods: {
+			areaConfirm: function(e) {
+				that.area = e.result
+				console.log('**********************' + JSON.stringify(that.townAddress))
+				for (let i = 0; i < that.areaList.length; i++) {
+					let item = that.areaList[i]
+					if (that.area == item.name) {
+						that.districtCode = item.adcode
+						that.subdistrictList = item.districts
+						break
+					}
+				}
+			},
 			onTownAddressConfirm: function(e) {
 				that.townAddress = e.result
 			},
+			areaChoose() {
+				// 点击地址触发事件
+				if (that.areaList.length > 0) {
+					that.areaVisible = true
+				} else {
+					that.showToast('请先选择区')
+				}
+
+			},
 			townAddressChoose() {
 				// 点击地址触发事件
-				if(that.subdistrictList.length > 0){
+				if (that.subdistrictList.length > 0) {
 					that.townAddressVisible = true
-				}else{
+				} else {
 					that.getAreaDate()
 				}
-				
+
 			},
 			getAddOrUpdateUser() { //
+				if (that.districtCode.length == 0) {
+					that.showToast('请选择区')
+					return
+				}
+				if (that.townAddress.length == 0) {
+					that.showToast('请选择街道')
+					return
+				}
+
 				that.$api.getAddOrUpdateUser({
-					cityCode: '',
-					districtCode: '',
+					cityCode: that.cityCode,
+					districtCode: that.districtCode,
 					streetName: that.townAddress
 				}).then((res) => {
 					let resData = res.data
 					if (resData.state_code == '400200') {
+						that.getUserInfo()
+
+					} else {
+
+					}
+
+				}).catch((err) => {
+
+				})
+			},
+			getUserInfo() { //
+				that.$api.getLoginUserInfo({}).then((res) => {
+					let resData = res.data
+					if (resData.state_code == '400200') {
+						that.$store.commit('setUserInfo', resData.data)
+						that.$store.commit('setwxHeaderImage', resData.data.headImage)
 						uni.navigateBack({
-							
+
 						})
 					} else {
 
@@ -90,11 +147,15 @@
 				})
 			},
 			getAreaDate() {
-				that.$api.getAreaDate({
-				}).then((res) => {
+				that.$api.getAreaDate({}).then((res) => {
 					let resData = res.data
 					if (resData.state_code == '400200') {
-						that.subdistrictList = resData.data
+						var qd = resData.data[0]
+
+						that.cityCode = qd.adcode
+						that.areaList = qd.districts
+
+						// console.log('**********************'+JSON.stringify(that.areaList))
 					} else {
 						that.showToast(resData.state_msg)
 					}
@@ -190,18 +251,20 @@
 		bottom: 300upx;
 		border-radius: 50upx;
 	}
+
 	.itemBackView {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		width: 700upx;
-		height: 250upx;
+		height: 300upx;
 		padding: 15upx 15upx;
 		/* background-color: #0081FF; */
 		position: absolute;
 		bottom: 500upx;
 		left: 25upx;
 	}
+
 	.mesClass {
 		position: absolute;
 		top: 40upx;
@@ -209,24 +272,41 @@
 		font-size: 30upx;
 		color: #D89720;
 	}
+
 	.inputClass2 {
 		border: 1upx solid #C9C9C9;
 		width: 450upx;
 		border-radius: 10upx;
-		padding: 20upx;
+		/* padding: 20upx; */
 		height: 60upx;
-		color: #FFFFFF;
+		color: #666666;
+		background-color: #F8F8F8;
+		margin: 0upx auto;
+		position: absolute;
+		bottom: 110upx;
+		left: 75upx;
+	}
+
+	.inputClass3 {
+		border: 1upx solid #C9C9C9;
+		width: 450upx;
+		border-radius: 10upx;
+		/* padding: 5upx; */
+		height: 60upx;
+		color: #666666;
 		background-color: #F8F8F8;
 		margin: 0upx auto;
 		position: absolute;
 		bottom: 40upx;
 		left: 75upx;
 	}
-	.adressPlasce{
+
+	.adressPlasce {
 		color: #C9C9C9;
 		font-size: 30upx;
 	}
-	.mitBtn{
+
+	.mitBtn {
 		position: absolute;
 		bottom: 40upx;
 		right: 75upx;
@@ -235,6 +315,7 @@
 		background-color: #09BB07;
 		color: #FFFFFF;
 	}
+
 	.itemBackView2 {
 		display: flex;
 		flex-direction: row;
@@ -243,12 +324,12 @@
 		width: 100%;
 		padding: 15upx 15upx;
 	}
-	
+
 	.leftClass {
 		margin-right: 10upx;
 		width: 20%;
 	}
-	
+
 	.inputClass {
 		border-bottom: 1upx solid #C9C9C9;
 		width: 75%;
@@ -256,42 +337,42 @@
 		padding: 10upx;
 		height: 60upx;
 	}
-	
-	
-	
+
+
+
 	.pickerSelect {
 		border-bottom: 1upx solid #C9C9C9;
 		width: 68%;
 		border-radius: 10upx;
 		padding: 10upx;
 	}
-	
+
 	.rightSelectImage {
 		width: 40upx;
 		height: 40upx;
 	}
-	
+
 	.foreignRadio {
 		margin-left: 100upx;
 	}
-	
+
 	.radioClass {
 		margin-right: 10upx;
 	}
-	
+
 	.bottomView {
 		width: 100%;
 		padding: 60upx;
 		background-color: #FFFFFF;
 	}
-	
+
 	.submitBackView {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		padding: 10upx 30upx;
 	}
-	
+
 	.submitBtn {
 		background: #0BB20C;
 		color: white;
@@ -303,11 +384,11 @@
 		border-radius: 40upx;
 		margin: 20upx 30upx;
 	}
-	
+
 	.saveBtn {
 		background-color: #46A0FC;
 	}
-	
+
 	.protocolView {
 		display: flex;
 		flex-direction: row;
@@ -316,43 +397,43 @@
 		padding: 15upx 20upx;
 		font-size: 25upx;
 	}
-	
+
 	.titleRightView {
 		color: #1296db;
 		position: absolute;
 		right: 65upx;
 	}
-	
+
 	.rightImageClass {
 		position: absolute;
 		right: 20upx;
 		width: 40upx;
 		height: 40upx;
 	}
-	
+
 	.detectionMes {
 		font-size: 28upx;
 		color: #F29D5D;
 	}
-	
+
 	.detectionResBackView {
 		display: flex;
 		flex-direction: row;
 		width: 100%;
 		padding: 15upx;
 	}
-	
+
 	.detectionItem {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		padding: 10upx 0upx;
 	}
-	
+
 	.detectionleftClass {
 		width: 35%;
 	}
-	
+
 	.detectionResultRight {
 		width: 15%;
 		display: flex;

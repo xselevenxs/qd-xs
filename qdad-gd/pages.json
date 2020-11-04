@@ -2,7 +2,7 @@
 	"pages": [{
 		"path": "pages/index/index",
 		"style": {
-			"navigationBarTitleText": "青岛市垃圾分类知识竞赛"
+			"navigationBarTitleText": "垃圾分类知识竞赛"
 		}
 	}, {
 		"path": "pages/activity/draw",
@@ -56,7 +56,7 @@
             "path" : "pages/selectAdress/selectAdress",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "街道选择",
                 "enablePullDownRefresh": false
             }
             

@@ -12,15 +12,15 @@
 		<view>
 			<view class="itemBackView">
 				<view class="leftClass">姓名</view>
-				<input @input="nameInput" :value="info.name" class="inputClass" placeholder="请输入姓名" />
+				<input @input="nameInput" placeholder-class="placeInput" :value="info.name" class="inputClass" placeholder="请输入姓名" />
 			</view>
 			<view class="itemBackView">
 				<view class="leftClass">电话</view>
-				<input @input="phoneInput" :value="info.tel" class="inputClass" placeholder="请输入电话" />
+				<input @input="phoneInput" placeholder-class="placeInput" :value="info.tel" class="inputClass" placeholder="请输入电话" />
 			</view>
 			<view class="itemBackView">
 				<view class="leftClass">地址</view>
-				<input @input="adressInput" :value="info.address" class="inputClass" placeholder="请输入地址" />
+				<input @input="adressInput" placeholder-class="placeInput" :value="info.address" class="inputClass" placeholder="请输入地址" />
 			</view>
 		</view>
 		<view class="primaryText submitBtn" @click="onSubmit">提交</view>
@@ -65,22 +65,22 @@
 			that.typeId = option.typeId
 			
 			if(that.typeId == '1'){
-				that.headerGoodsImage = '/static/huiweiM40-s.jpg'
+				that.headerGoodsImage = '/static/baohu-m.png'
 			}
 			if(that.typeId == '2'){
-				that.headerGoodsImage = '/static/guo.png'
+				that.headerGoodsImage = '/static/baohu-m.png'
 			}
 			if(that.typeId == '3'){
-				that.headerGoodsImage = '/static/dianyiing-s.png'
+				that.headerGoodsImage = '/static/baohu-m.png'
 			}
 			if(that.typeId == '4'){
-				that.headerGoodsImage = '/static/lajidai.png'
+				that.headerGoodsImage = '/static/baohu-m.png'
 			}
 			if(that.typeId == '5'){
-				that.headerGoodsImage = '/static/baoyang-s.png'
+				that.headerGoodsImage = '/static/baohu-m.png'
 			}
 			if(that.typeId == '6'){
-				that.headerGoodsImage = '/static/healthBH-s.png'
+				that.headerGoodsImage = '/static/baohu-m.png'
 			}
 		},
 		methods: {
@@ -182,7 +182,8 @@
 
 	.leftClass {
 		margin-right: 10upx;
-		width: 20%;
+		width: 15%;
+		text-align: right;
 	}
 
 	.inputClass {
@@ -191,6 +192,10 @@
 		border-radius: 10upx;
 		padding: 10upx;
 		height: 60upx;
+	}
+	.placeInput{
+		font-size: 30upx;
+		
 	}
 	.submitBtn {
 		background: #0BB20C;

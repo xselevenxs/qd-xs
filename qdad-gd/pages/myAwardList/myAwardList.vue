@@ -73,7 +73,10 @@
 					
 			},
 			getMyAwards(){
-				that.$api.getAwardList({pageSize:'50'}).then((res) => {
+				that.$api.getAwardList({
+					pageNo:1,
+					pageSize:50,
+					}).then((res) => {
 					let resData = res.data
 					if(resData.state_code == '400200'){
 						that.awardList = resData.data
