@@ -1,14 +1,19 @@
 <template>
 	<view class="container" v-bind:style="{height:screenHeight+'px'}">
-		<view class="title">
-			<view class="name">兔师傅健康保护套餐</view>
-			<view class="invalTime">有效期：2021-01-31</view>
+		<view class="header1">
+			<view class="ticket">
+				<image src="/static/tsfbhtt.png" style="width: 100%;height: 100%;"></image>
+			</view>
 		</view>
 		<view class="qrBack">
 			<tki-qrcode v-if="ifShow" cid="qrcode2" ref="qrcode2" :val="qrContent" :size="size" :onval="onval" :loadMake="loadMake"
 			 :usingComponents="true" />
 		</view>
-
+		<view class="header" style="margin-top: 30upx;">
+			<view class="ticket">
+				<image src="/static/mddz2.png" style="width: 100%;height: 100%;"></image>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -64,6 +69,32 @@
 </script>
 
 <style>
+	.header1{
+		width: 100%;
+		height: 300upx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 30upx;
+	}
+	.header {
+		width: 100%;
+		height: 400upx;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 30upx;
+	}
+
+	.ticket {
+		width: 700upx;
+		height: 370upx;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		position: relative;
+	}
+
 	.title {
 		width: 100%;
 		height: 200upx;

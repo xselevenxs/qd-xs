@@ -50,6 +50,7 @@
 			return {
 				screenHeight: 0,
 				nickname: '',
+				isToAdressSelect: false
 			}
 		},
 		onLoad() {
@@ -63,14 +64,9 @@
 		onShow() {
 			if(that.token){
 				that.getUserInfo()
+				that.judgeAdress()
 			}
-			// if(that.userInfo) {
-			// 	if(!that.userInfo.streetName){
-			// 		uni.navigateTo({
-			// 			url: '../selectAdress/selectAdress'
-			// 		})
-			// 	}
-			// }
+			
 		},
 		methods: {
 			toSelectAdress(){
@@ -102,26 +98,31 @@
 			},
 			startAns(){
 				that.getUserInfo()
-				if(that.userInfo.isAnswer == '0' || that.userInfo.isAnswer == 0){
-					that.$api.getTikuListRandom({
-					}).then((res) => {
-						let resData = res.data
-						if(resData.state_code == '400200'){
-							that.$store.commit('setAnsList',resData.data)
-							uni.navigateTo({
-								url: '../ans/ans'
-							})
-						}else{
-							that.showToast(resData.state_msg)
-						}
-					
-					}).catch((err) => {
-						
+				if(that.userInfo.isPutAddress == '1' || that.userInfo.isPutAddress == 1 ){
+					uni.navigateTo({
+						url: '../selectAdress/selectAdress'
 					})
 				}else{
-					that.showToast('您今日已答题，每人每天仅能答题一次')
+					if(that.userInfo.isAnswer == '0' || that.userInfo.isAnswer == 0){
+						that.$api.getTikuListRandom({
+						}).then((res) => {
+							let resData = res.data
+							if(resData.state_code == '400200'){
+								that.$store.commit('setAnsList',resData.data)
+								uni.navigateTo({
+									url: '../ans/ans'
+								})
+							}else{
+								that.showToast(resData.state_msg)
+							}
+						
+						}).catch((err) => {
+							
+						})
+					}else{
+						that.showToast('您今日已答题，每人每天仅能答题一次')
+					}
 				}
-				
 			},
 			getUserInfo(){//
 				that.$api.getLoginUserInfo({
