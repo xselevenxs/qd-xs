@@ -23,7 +23,11 @@
 				<!-- <image @click="startAns" src="../../static/startAns2.png" class="startans"></image> -->
 				<image @click="startAns" src="../../static/anss.png" class="startans"></image>
 				<image @click="drawClick" src="../../static/drawss.png" class="draws"></image>
+				<view @click="ruleClick" class="bottom">
+					活动规则
+				</view>
 			</view>
+			
 
 			<!-- <view class="ans">答题</view>
 			<view @click="drawClick" class="draw">抽奖</view> -->
@@ -88,6 +92,11 @@
 				that.getUserInfo()
 				uni.navigateTo({
 					url: '../activity/draw'
+				})
+			},
+			ruleClick() {
+				uni.navigateTo({
+					url: '../rule/rule'
 				})
 			},
 			startAns(){
@@ -248,5 +257,16 @@
 		right: 175upx;
 		bottom: 200upx;
 		border-radius: 50upx;
+	}
+	.bottom {
+		position: absolute;
+		bottom: 100upx;
+		left: 50%;
+		margin-left: -60upx;
+		border-bottom: 1px solid #FFFFFF;
+		font-size: 30upx;
+		color: #FFFFFF;
+		text-align:center;
+	
 	}
 </style>

@@ -61,6 +61,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/rule/rule",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "活动规则",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
