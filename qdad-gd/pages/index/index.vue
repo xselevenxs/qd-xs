@@ -231,7 +231,7 @@
 		height: 136upx;
 		position: absolute;
 		right: 175upx;
-		bottom: 600upx;
+		bottom: 800upx;
 	}
 	.startans {
 		width: 400upx;
