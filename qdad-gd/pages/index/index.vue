@@ -64,7 +64,6 @@
 		onShow() {
 			if(that.token){
 				that.getUserInfo()
-				that.judgeAdress()
 			}
 			
 		},
