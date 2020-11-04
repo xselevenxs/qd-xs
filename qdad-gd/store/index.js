@@ -9,7 +9,8 @@ const state = new Vuex.Store({
 		serviceUrl: 'http://wctest.lanbenzi.cn:8001/dati',
 		token: '',
 		myAppId: "wx86a1e0f53265f9f7",
-		myWeiXinHttp: "http%3A%2F%2Fxs-dev.grip8.com",
+		// myWeiXinHttp: "http%3A%2F%2Fxs-dev.grip8.com",
+		myWeiXinHttp: "http%3A%2F%2Fwctest.lanbenzi.cn",
 		wxHeaderImage: '/static/headerdefault.png',
 		userInfo: {},
 		ansList: []

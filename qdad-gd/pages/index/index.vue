@@ -98,7 +98,7 @@
 			},
 			startAns(){
 				that.getUserInfo()
-				if(that.userInfo.isPutAddress == '1' || that.userInfo.isPutAddress == 1 ){
+				if(that.userInfo.isPutAddress == '0' || that.userInfo.isPutAddress == 0 ){
 					uni.navigateTo({
 						url: '../selectAdress/selectAdress'
 					})
