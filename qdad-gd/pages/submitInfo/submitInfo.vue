@@ -65,22 +65,22 @@
 			that.typeId = option.typeId
 			
 			if(that.typeId == '1'){
-				that.headerGoodsImage = '/static/baohu-m.png'
+				that.headerGoodsImage = '/static/huiweiM40-s.jpg'
 			}
 			if(that.typeId == '2'){
-				that.headerGoodsImage = '/static/baohu-m.png'
+				that.headerGoodsImage = '/static/guo.png'
 			}
 			if(that.typeId == '3'){
-				that.headerGoodsImage = '/static/baohu-m.png'
+				that.headerGoodsImage = '/static/dianyiing-s.png'
 			}
 			if(that.typeId == '4'){
-				that.headerGoodsImage = '/static/baohu-m.png'
+				that.headerGoodsImage = '/static/lajidai.png'
 			}
 			if(that.typeId == '5'){
-				that.headerGoodsImage = '/static/baohu-m.png'
+				that.headerGoodsImage = '/static/baoyang-s.png'
 			}
 			if(that.typeId == '6'){
-				that.headerGoodsImage = '/static/baohu-m.png'
+				that.headerGoodsImage = '/static/healthBH-s.png'
 			}
 		},
 		methods: {

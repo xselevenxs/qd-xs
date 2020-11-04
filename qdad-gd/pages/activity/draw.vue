@@ -18,7 +18,9 @@
 								<view class="canvas-item-text" :style="'transform:rotate('+(index )+')'">
 									<text class="b" style="font-size: 25upx;">{{iteml.name}}</text>
 									<image v-if="iteml.value == '1'" src="../../static/huiweiM40-s.jpg" style="width: 80upx;height: 80upx;margin-top: 20upx;"></image>
+									<image v-if="iteml.value == '2'" src="../../static/guo.png" style="width: 80upx;height: 80upx;margin-top: 20upx;"></image>
 									<image v-if="iteml.value == '3'" src="../../static/dianyiing-s.png" style="width: 120upx;height: 80upx;margin-top: 20upx;"></image>
+									<image v-if="iteml.value == '4'" src="../../static/lajidai.png" style="width: 120upx;height: 80upx;margin-top: 20upx;"></image>
 									<image v-if="iteml.value == '5'" src="../../static/baoyang-s.png" style="width: 120upx;height: 80upx;margin-top: 20upx;"></image>
 									<image v-if="iteml.value == '6'" src="../../static/healthBH-s.png" style="width: 120upx;height: 80upx;margin-top: 20upx;"></image>
 									<!-- <text class="icon-awrad iconfont " :class="iteml.icon"></text> -->
@@ -83,7 +85,7 @@
 						icon: 'icondazhe text-danger',
 					},
 					{
-						"name": "小型垃圾桶",
+						"name": "环保垃圾袋",
 						"value": "4",
 						icon: 'icondazhe text-danger',
 					},

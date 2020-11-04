@@ -4,9 +4,9 @@
 			<view class="item" @click="itemClick(item)">
 				<image class="img" v-if="item.productId == '1'&&item.productType == '2'" mode="aspectFit" src="/static/huiweiM40-s.jpg"></image>
 				<image class="img" v-if="item.productId == '1'&&item.productType == '1'" mode="aspectFit" src="/static/healthBH-s.png"></image>
-				<image class="img" v-if="item.productId == '2'" mode="aspectFit" src="/static/huiweiM40-s.jpeg"></image>
+				<image class="img" v-if="item.productId == '2'" mode="aspectFit" src="/static/guo.png"></image>
 				<image class="img" v-if="item.productId == '3'" mode="aspectFit" src="/static/dianyiing-s.png"></image>
-				<image class="img" v-if="item.productId == '4'" mode="aspectFit" src="/static/daijinquan.jpg"></image>
+				<image class="img" v-if="item.productId == '4'" mode="aspectFit" src="/static/lajidai.png"></image>
 				<image class="img" v-if="item.productId == '5'" mode="aspectFit" src="/static/baoyang-s.png"></image>
 				<image class="img" v-if="item.productId == '6'" mode="aspectFit" src="/static/healthBH-s.png"></image>
 				<view class="middle">
