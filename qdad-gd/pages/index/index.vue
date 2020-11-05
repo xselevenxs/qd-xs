@@ -4,7 +4,7 @@
 			<!-- <image src="/static/glable-bgconfirm.jpg" class="cont"></image> -->
 			<image src="/static/q-bg.jpg" class="cont"></image>
 			<view class="header">
-				<view class="padding-xl radius shadow bg-white info">
+				<view class="padding-xl radius shadow info">
 					<!-- <view class="cu-avatar xl round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view> -->
 					<image v-bind:src=wxHeaderImage class="cu-avatar xl round"></image>
 					<view class="mid">
