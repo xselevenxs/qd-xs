@@ -2,7 +2,7 @@
 	<view class="container" v-bind:style="{height:screenHeight+'px'}">
 		<view class="header1">
 			<view class="ticket">
-				<image src="/static/tsfbhtt.png" style="width: 100%;height: 100%"></image>
+				<image src="/static/tsfbhtt.png"  mode="aspectFit" style="width: 100%;height: 100%"></image>
 			</view>
 		</view>
 		<view class="qrBack">
@@ -87,8 +87,8 @@
 	}
 
 	.ticket {
-		width: 700upx;
-		height: 370upx;
+		width: 600upx;
+		height: 300upx;
 		display: flex;
 		flex-direction: row;
 		align-items: center;

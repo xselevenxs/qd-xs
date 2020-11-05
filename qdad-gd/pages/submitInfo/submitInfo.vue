@@ -3,7 +3,7 @@
 		<!-- <image src="../../static/car.jpeg" class="img"></image> -->
 		<view class="header">
 			<view class="ticket">
-				<image :src="headerGoodsImage" style="width: 100%;height: 100%;"></image>
+				<image :src="headerGoodsImage" mode="aspectFit" style="width: 100%;height: 100%;"></image>
 			</view>
 		</view>
 		<view class="mesBack">
@@ -64,19 +64,19 @@
 			that.goodsName = option.name
 			that.typeId = option.typeId
 			if(that.typeId == '1'){
-			    that.headerGoodsImage = '/static/huiweiM40-s.jpg'
+			    that.headerGoodsImage = '/static/huiweiM40.jpg'
 			   }
 			   if(that.typeId == '2'){
 			    that.headerGoodsImage = '/static/guo.png'
 			   }
 			   if(that.typeId == '3'){
-			    that.headerGoodsImage = '/static/dianyiing-s.png'
+			    that.headerGoodsImage = '/static/dianyiing.png'
 			   }
 			   if(that.typeId == '4'){
 			    that.headerGoodsImage = '/static/lajidai.png'
 			   }
 			   if(that.typeId == '5'){
-			    that.headerGoodsImage = '/static/baoyang-s.png'
+			    that.headerGoodsImage = '/static/baoyang.png'
 			   }
 			   if(that.typeId == '6'){
 			    that.headerGoodsImage = '/static/healthBH-s.png'
@@ -133,8 +133,8 @@
 			font-size: 30upx;
 		}
 		.ticket {
-			width: 700upx;
-			height: 370upx;
+			width: 600upx;
+			height: 300upx;
 			display: flex;
 			flex-direction: row;
 			align-items: center;

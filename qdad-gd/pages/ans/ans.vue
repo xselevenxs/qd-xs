@@ -1,7 +1,8 @@
 <template>
 	<view class="datibj">
+		<!-- <image src="../../static/datibjtp.jpg" style="position: absolute;left: 0;right: 0;top: 0;"></image> -->
 		<view id="top-box" class="cu-bar bg-white solid-bottom" style="background: rgba(255,255,255,0);">
-			<view class="action text-black">
+			<view class="action text-black bg-green " style="color: #FFFFFF;padding: 15upx;border-radius: 5upx;font-size: 25upx;">
 				<text v-if="currentType===1">判断题</text>
 				<text v-else-if="currentType===2">单选题</text>
 				<text v-else-if="currentType===3">多选题</text>
@@ -14,10 +15,10 @@
 				<button class="cu-btn bg-green shadow"  data-target="modalCard">{{subjectIndex+1}}/10</button>
 			</view>
 		</view>
-		<view class="cu-modal"  :class="modalCard=='modalCard'?'show':''" @tap="hideCardModal">
-			<view class="cu-dialog" style="background: rgba(255,255,255,0);"> @tap.stop>
+		<view class="cu-modal" :class="modalCard=='modalCard'?'show':''" @tap="hideCardModal">
+			<view class="cu-dialog" @tap.stop>
 
-				<scroll-view class="page padding" style="background: rgba(255,255,255,0);"> :scroll-y=true :style="{'height':swiperHeight}">
+				<scroll-view class="page padding" :scroll-y=true :style="{'height':swiperHeight}">
 					<view class="cu-bar solid-bottom">
 						<view class="action">
 							<text class="cuIcon-title text-red"></text>答题卡
@@ -61,36 +62,36 @@
 
 					<view v-if="index-subjectIndex>=-1&&index-subjectIndex<=1">
 
-						<view class="cu-bar bg-white solid-bottom">
-							<view class="action text-white">
+						<view class="cu-bar solid-bottom">
+							<view class="action text-black">
 								<text class="cuIcon-title text-red"></text>{{subject.title}}
 							</view>
 						</view>
 						<view>
 
-							<radio-group class="block" @change="RadioboxChange" v-if="subject.type===1">
-								<view class="cu-form-group" v-for="option in subject.optionList">
+							<radio-group class="block" style="background: rgba(255,255,255,0);" @change="RadioboxChange" v-if="subject.type===1">
+								<view class="cu-form-group" style="background: rgba(255,255,255,0);" v-for="option in subject.optionList">
 									<radio :value="option.id" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></radio>
-									<view class="title text-white text-line-2">{{option.id}}.{{option.content}}</view>
+									<view class="title text-black text-line-2" style="background: rgba(255,255,255,0);">{{option.id}}.{{option.content}}</view>
 								</view>
 							</radio-group>
-							<radio-group class="block" @change="RadioboxChange" v-if="subject.type===2">
-								<view class="cu-form-group" v-for="option in subject.optionList">
+							<radio-group class="block" style="background: rgba(255,255,255,0);" @change="RadioboxChange" v-if="subject.type===2">
+								<view class="cu-form-group" style="background: rgba(255,255,255,0);" v-for="option in subject.optionList">
 									<radio :value="option.id" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></radio>
-									<view class="title text-white text-line-2">{{option.content}}</view>
+									<view class="title text-black text-line-2">{{option.content}}</view>
 								</view>
 							</radio-group>
 
-							<checkbox-group class="block" @change="CheckboxChange" v-else-if="subject.type===3">
-								<view class="cu-form-group" v-for="option in subject.optionList">
+							<checkbox-group class="block" style="background: rgba(255,255,255,0);" @change="CheckboxChange" v-else-if="subject.type===3">
+								<view class="cu-form-group" style="background: rgba(255,255,255,0);" v-for="option in subject.optionList">
 									<checkbox :value="option.id" :class="subject.userAnswer.indexOf(option.id) > -1?'checked':''" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></checkbox>
-									<view class="title  text-white text-line-2">{{option.content}}</view>
+									<view class="title  text-black text-line-2">{{option.content}}</view>
 								</view>
 							</checkbox-group>
 
 							<view v-else-if="subject.type===4">
 								<view class="cu-form-group solid-bottom">
-									<view class="title  text-white">
+									<view class="title  text-black">
 										答：
 									</view>
 									<input placeholder="文本输入框" name="input" v-model="subject.userAnswer" @blur="textInput"></input>
@@ -112,9 +113,9 @@
 
 						<view v-show="subject.showAnswer" class="margin-top solid-top">
 							<view class="cu-bar">
-								<view class="action  text-grey">
+								<view class="action  text-white">
 									<text>正确答案：</text>
-									<text class="solid-bottom  padding-left text-green">{{subject.answer}}</text>
+									<text class="solid-bottom  padding-left text-white">{{subject.answer}}</text>
 								</view>
 							</view>
 							<!-- <view class="cu-bar cu-bar-title">
@@ -133,8 +134,9 @@
 		</form>
 		<view v-if="subjectIndex == 9" @click="answerToService" class="bottomBtn">提交</view>
 		<view v-else @click="MoveSubject(1)" class="bottomBtn">下一题</view>
-		<!-- <view id="foot-box" class="cu-bar tabbar foot" style="box-shadow:0px 0px 0px #FFFFFF;">
-			<view class="bottomBackview">
+		<view id="foot-box"  style="background: rgba(255,255,255,0);">
+			<!-- class="cu-bar tabbar foot" -->
+			<!-- view class="bottomBackview" style="background: rgba(255,255,255,0);">
 				<view v-if="subjectIndex == 9" @click="answerToService" class="bottomBtn">提交</view>
 				<view v-else @click="MoveSubject(1)" class="bottomBtn">下一题</view>
 			</view> -->
@@ -480,15 +482,15 @@
 	.bottomBtn {
 		width: 350upx;
 		height: 100upx;
-		background-color: #007AFF;
+		background-color: #1AAD19;
 		color: #FFFFFF;
 		border-radius: 30upx;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		position: absolute;
-		bottom: 100upx;
 		left: 200upx;
+		bottom: 150upx;
 	}
 	.text-line-2 {
 		overflow: hidden;

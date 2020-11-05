@@ -11,7 +11,7 @@
 				<image class="img" v-if="item.productId == '6'" mode="aspectFit" src="/static/healthBH-s.png"></image>
 				<view class="middle">
 					<view class="type">{{item.productName}}</view>
-					<view v-if="item.productType == 1">有效期：2020.12.31</view>
+					<view v-if="item.productType == 1||(item.productType == '2'&&item.productId == '5')">有效期：2020.12.31</view>
 					<view v-else>中奖时间：{{item.createTime}}</view>
 				</view>
 				
@@ -21,6 +21,7 @@
 				<view class="state" style="color: #D89720;" v-if="item.productType == '2'&&item.hasAddress == '1'">已提交</view>
 			</view>
 		</view>
+		<view v-if="awardList.length == 0" style="text-align: center;width: 100%;padding: 20upx;">暂无奖品</view>
 		<view  class="connect">客服电话：0532—85702909</view>
 	</view>
 	
@@ -132,5 +133,7 @@
 	/* position: absolute;
 	bottom: 30upx; */
 	width: 100%;
+	color: #D89720;
+	padding: 50upx;
 }
 </style>
