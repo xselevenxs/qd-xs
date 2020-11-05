@@ -11,7 +11,7 @@
 				<image class="img" v-if="item.productId == '6'" mode="aspectFit" src="/static/healthBH-s.png"></image>
 				<view class="middle">
 					<view class="type">{{item.productName}}</view>
-					<view v-if="item.productType == 1">有效期：2021-01-31</view>
+					<view v-if="item.productType == 1">有效期：2020.12.31</view>
 					<view v-else>中奖时间：{{item.createTime}}</view>
 				</view>
 				
