@@ -131,7 +131,7 @@
 				</swiper-item>
 			</swiper>
 		</form>
-		<view id="foot-box" class="cu-bar tabbar bg-white  foot" style="box-shadow:0px 0px 0px #FFFFFF;">
+		<view id="foot-box" class="cu-bar tabbar foot" style="box-shadow:0px 0px 0px #FFFFFF;">
 			<view class="bottomBackview">
 				<view v-if="subjectIndex == 9" @click="answerToService" class="bottomBtn">提交</view>
 				<view v-else @click="MoveSubject(1)" class="bottomBtn">下一题</view>
@@ -437,7 +437,13 @@
 	page {
 		background-color: #FFFFFF;
 	}
-
+	.datibj {
+		background-image: url(../../static/datibjtp.jpg);
+		background-repeat: no-repeat;
+		background-attachment:fixed;
+		/* background-position:center; */
+		background-size: 750upx 100%;
+	}
 	.cu-form-group {
 		justify-content: flex-start
 	}

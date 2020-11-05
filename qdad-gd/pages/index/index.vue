@@ -11,7 +11,7 @@
 						<view @click="toSelectAdress">昵称：{{userInfo.userName}}</view>
 						<view style="display: flex;flex-direction: row;">
 							<view style="padding: 10upx 0upx;">积分：{{userInfo.integral}}</view>
-							<view @click="dhClick" style="color: #00B26A;margin-left: 10upx;padding: 10upx;border-radius: 5upx;">兑换</view>
+							<view @click="dhClick" style="color: #F29D5D;margin-left: 10upx;padding: 10upx;border-radius: 5upx;">兑换</view>
 						</view>
 					</view>
 					<view @click="myAward" class="padding-sm radius shadow bg-red">
@@ -20,7 +20,7 @@
 				</view>
 			</view>
 			<view class="middle">
-				<!-- <image src="../../static/titliecontent.jpeg" class="titliecontent"></image> -->
+				<image src="/static/diqiu.png" style="width: 650upx;height: 680upx;position: absolute;left: 50upx;bottom: 100upx;"></image>
 				<!-- <image @click="startAns" src="../../static/startAns2.png" class="startans"></image> -->
 				<image @click="startAns" src="../../static/anss.png" class="startans"></image>
 				<image @click="drawClick" src="../../static/drawss.png" class="draws"></image>
@@ -28,7 +28,6 @@
 					活动规则
 				</view>
 			</view>
-			
 
 			<!-- <view class="ans">答题</view>
 			<view @click="drawClick" class="draw">抽奖</view> -->
@@ -97,6 +96,10 @@
 				})
 			},
 			startAns(){
+				// uni.navigateTo({
+				// 	url: '../ans/ans'
+				// })
+				// return
 				that.getUserInfo()
 				if(that.userInfo.isPutAddress == '0' || that.userInfo.isPutAddress == 0 ){
 					uni.navigateTo({
@@ -199,6 +202,11 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+		background-image: url(../../static/mybjtin.png);
+		background-repeat: no-repeat;
+		background-attachment:fixed;
+		/* background-position:center; */
+		background-size: 730upx 300upx;
 	}
 
 	.mid {
@@ -208,8 +216,15 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		color: #FFFFFF;
 	}
-
+	.middle{
+		
+		/* background-image: url(../../static/diqiu.png);
+		background-repeat: no-repeat;
+		background-attachment:fixed;
+		background-size: 730upx 300upx; */
+	}
 	.ans {
 		width: 50%;
 		height: 120upx;
