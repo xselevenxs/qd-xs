@@ -2,6 +2,8 @@
 	<view class="conbox">
 		<view class="container2">
 			<image src="/static/q-bg.jpg" class="cont"></image>
+			<image src="/static/title.png" style="width: 600upx;height: 150upx;position: absolute;left: 75upx;top: 100upx;"></image>
+			<image src="/static/diqiu.png" style="width: 650upx;height: 680upx;position: absolute;left: 50upx;bottom: 50upx;"></image>
 			<view class="itemBackView">
 				<image src="../../static/biankuang.png" style="width: 100%; height: 100%;"></image>
 				<!-- <view class="leftClass">街道</view> -->
@@ -261,7 +263,7 @@
 		padding: 15upx 15upx;
 		/* background-color: #0081FF; */
 		position: absolute;
-		bottom: 500upx;
+		bottom: 600upx;
 		left: 25upx;
 	}
 

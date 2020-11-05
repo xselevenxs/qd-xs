@@ -1,6 +1,6 @@
 <template>
-	<view>
-		<view id="top-box" class="cu-bar bg-white solid-bottom">
+	<view class="datibj">
+		<view id="top-box" class="cu-bar bg-white solid-bottom" style="background: rgba(255,255,255,0);">
 			<view class="action text-black">
 				<text v-if="currentType===1">判断题</text>
 				<text v-else-if="currentType===2">单选题</text>
@@ -14,10 +14,10 @@
 				<button class="cu-btn bg-green shadow"  data-target="modalCard">{{subjectIndex+1}}/10</button>
 			</view>
 		</view>
-		<view class="cu-modal" :class="modalCard=='modalCard'?'show':''" @tap="hideCardModal">
-			<view class="cu-dialog" @tap.stop>
+		<view class="cu-modal"  :class="modalCard=='modalCard'?'show':''" @tap="hideCardModal">
+			<view class="cu-dialog" style="background: rgba(255,255,255,0);"> @tap.stop>
 
-				<scroll-view class="page padding" :scroll-y=true :style="{'height':swiperHeight}">
+				<scroll-view class="page padding" style="background: rgba(255,255,255,0);"> :scroll-y=true :style="{'height':swiperHeight}">
 					<view class="cu-bar solid-bottom">
 						<view class="action">
 							<text class="cuIcon-title text-red"></text>答题卡
@@ -62,7 +62,7 @@
 					<view v-if="index-subjectIndex>=-1&&index-subjectIndex<=1">
 
 						<view class="cu-bar bg-white solid-bottom">
-							<view class="action text-black">
+							<view class="action text-white">
 								<text class="cuIcon-title text-red"></text>{{subject.title}}
 							</view>
 						</view>
@@ -71,26 +71,26 @@
 							<radio-group class="block" @change="RadioboxChange" v-if="subject.type===1">
 								<view class="cu-form-group" v-for="option in subject.optionList">
 									<radio :value="option.id" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></radio>
-									<view class="title text-black text-line-2">{{option.id}}.{{option.content}}</view>
+									<view class="title text-white text-line-2">{{option.id}}.{{option.content}}</view>
 								</view>
 							</radio-group>
 							<radio-group class="block" @change="RadioboxChange" v-if="subject.type===2">
 								<view class="cu-form-group" v-for="option in subject.optionList">
 									<radio :value="option.id" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></radio>
-									<view class="title text-black text-line-2">{{option.content}}</view>
+									<view class="title text-white text-line-2">{{option.content}}</view>
 								</view>
 							</radio-group>
 
 							<checkbox-group class="block" @change="CheckboxChange" v-else-if="subject.type===3">
 								<view class="cu-form-group" v-for="option in subject.optionList">
 									<checkbox :value="option.id" :class="subject.userAnswer.indexOf(option.id) > -1?'checked':''" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></checkbox>
-									<view class="title  text-black text-line-2">{{option.content}}</view>
+									<view class="title  text-white text-line-2">{{option.content}}</view>
 								</view>
 							</checkbox-group>
 
 							<view v-else-if="subject.type===4">
 								<view class="cu-form-group solid-bottom">
-									<view class="title  text-black">
+									<view class="title  text-white">
 										答：
 									</view>
 									<input placeholder="文本输入框" name="input" v-model="subject.userAnswer" @blur="textInput"></input>
@@ -131,11 +131,13 @@
 				</swiper-item>
 			</swiper>
 		</form>
-		<view id="foot-box" class="cu-bar tabbar foot" style="box-shadow:0px 0px 0px #FFFFFF;">
+		<view v-if="subjectIndex == 9" @click="answerToService" class="bottomBtn">提交</view>
+		<view v-else @click="MoveSubject(1)" class="bottomBtn">下一题</view>
+		<!-- <view id="foot-box" class="cu-bar tabbar foot" style="box-shadow:0px 0px 0px #FFFFFF;">
 			<view class="bottomBackview">
 				<view v-if="subjectIndex == 9" @click="answerToService" class="bottomBtn">提交</view>
 				<view v-else @click="MoveSubject(1)" class="bottomBtn">下一题</view>
-			</view>
+			</view> -->
 			
 			<!-- <view class="action" @click="MoveSubject(-1)">
 				<view class="cuIcon-cu-image">
@@ -476,7 +478,7 @@
 		justify-content: center;
 	}
 	.bottomBtn {
-		width: 50%;
+		width: 350upx;
 		height: 100upx;
 		background-color: #007AFF;
 		color: #FFFFFF;
@@ -484,6 +486,9 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		position: absolute;
+		bottom: 100upx;
+		left: 200upx;
 	}
 	.text-line-2 {
 		overflow: hidden;

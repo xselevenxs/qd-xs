@@ -3,6 +3,7 @@
 		<view class="container2">
 			<!-- <image src="/static/glable-bgconfirm.jpg" class="cont"></image> -->
 			<image src="/static/q-bg.jpg" class="cont"></image>
+			
 			<view class="header">
 				<view class="padding-xl radius shadow info">
 					<!-- <view class="cu-avatar xl round" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view> -->
@@ -20,7 +21,8 @@
 				</view>
 			</view>
 			<view class="middle">
-				<image src="/static/diqiu.png" style="width: 650upx;height: 680upx;position: absolute;left: 50upx;bottom: 100upx;"></image>
+				<image src="/static/diqiu.png" style="width: 650upx;height: 680upx;position: absolute;left: 50upx;bottom: 50upx;"></image>
+				<image src="/static/title.png" style="width: 600upx;height: 150upx;position: absolute;left: 75upx;top: 300upx;"></image>
 				<!-- <image @click="startAns" src="../../static/startAns2.png" class="startans"></image> -->
 				<image @click="startAns" src="../../static/anss.png" class="startans"></image>
 				<image @click="drawClick" src="../../static/drawss.png" class="draws"></image>
@@ -64,7 +66,7 @@
 			if(that.token){
 				that.getUserInfo()
 			}
-			
+			that.getMobileLogin()
 		},
 		methods: {
 			toSelectAdress(){
