@@ -265,7 +265,6 @@
 		position: absolute;
 		right: 175upx;
 		bottom: 400upx;
-		border-radius: 50upx;
 	}
 	.draws {
 		width: 400upx;
@@ -273,7 +272,6 @@
 		position: absolute;
 		right: 175upx;
 		bottom: 200upx;
-		border-radius: 50upx;
 	}
 	.bottom {
 		position: absolute;
