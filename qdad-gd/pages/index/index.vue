@@ -86,6 +86,7 @@
 			},
 			drawClick() {
 				that.getUserInfo()
+				//that.getMobileLogin()
 				uni.navigateTo({
 					url: '../activity/draw'
 				})

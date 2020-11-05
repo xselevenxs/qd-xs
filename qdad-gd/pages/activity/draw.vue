@@ -70,7 +70,7 @@
 		data() {
 			return {
 				list: [{
-						"name": "华为40Mate Pro",
+						"name": "华为Mate40 Pro",
 						"value": "1",
 						icon: 'icondazhe text-danger',
 					},
