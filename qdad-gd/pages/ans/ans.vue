@@ -189,7 +189,7 @@
 			return {
 				curIntervalId: '',
 				curTimeoutId: '',
-				timecount: 20,
+				timecount: 15,
 				userFavor: false, //是否已收藏
 				currentType: 0, //当前题型
 				subjectIndex: 0, //跳转索引
@@ -360,7 +360,7 @@
 					if (that.curIntervalId) {
 						clearInterval(that.curIntervalId)
 					}
-					that.timecount = 20
+					that.timecount = 15
 					that.curIntervalId = setInterval(function() {
 						that.timecount--
 						if (that.timecount == 0) {
