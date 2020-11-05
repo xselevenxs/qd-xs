@@ -1,7 +1,7 @@
 <template>
 	<view class="conbox">
 		<view class="container2">
-			<image src="/static/rule.jpg" class="cont"></image>
+			<image src="/static/rule.jpeg" class="cont"></image>
 		</view>
 	</view>
 </template>
