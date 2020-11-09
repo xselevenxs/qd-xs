@@ -4,11 +4,10 @@
 		onLaunch: function() {
 			console.log('App Launch');
 			that = this
-
+			// return
 			//  临时修改为默认的token  <<<<
 			var myAppId = that.$store.state.myAppId
 			var myWeiXinHttp = that.$store.state.myWeiXinHttp
-			
 			if (that.is_weixin()) {
 				var nativeToken = uni.getStorageSync('nativeTokenInfo_key')
 				if (nativeToken) {

@@ -71,20 +71,20 @@
 
 							<radio-group class="block" style="background: rgba(255,255,255,0);" @change="RadioboxChange" v-if="subject.type===1">
 								<view class="cu-form-group" style="background: rgba(255,255,255,0);" v-for="option in subject.optionList">
-									<radio :value="option.id" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></radio>
+									<radio :disabled="isDisableAns" :value="option.id" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></radio>
 									<view class="title text-black text-line-2" style="background: rgba(255,255,255,0);">{{option.id}}.{{option.content}}</view>
 								</view>
 							</radio-group>
 							<radio-group class="block" style="background: rgba(255,255,255,0);" @change="RadioboxChange" v-if="subject.type===2">
 								<view class="cu-form-group" style="background: rgba(255,255,255,0);" v-for="option in subject.optionList">
-									<radio :value="option.id" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></radio>
+									<radio :disabled="isDisableAns" :value="option.id" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></radio>
 									<view class="title text-black text-line-2">{{option.content}}</view>
 								</view>
 							</radio-group>
 
 							<checkbox-group class="block" style="background: rgba(255,255,255,0);" @change="CheckboxChange" v-else-if="subject.type===3">
 								<view class="cu-form-group" style="background: rgba(255,255,255,0);" v-for="option in subject.optionList">
-									<checkbox :value="option.id" :class="subject.userAnswer.indexOf(option.id) > -1?'checked':''" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></checkbox>
+									<checkbox :disabled="isDisableAns" :value="option.id" :class="subject.userAnswer.indexOf(option.id) > -1?'checked':''" :checked="subject.userAnswer.indexOf(option.id) > -1?true:false"></checkbox>
 									<view class="title  text-black text-line-2">{{option.content}}</view>
 								</view>
 							</checkbox-group>
@@ -111,7 +111,7 @@
 
 						</view>
 
-						<view v-show="subject.showAnswer" class="margin-top solid-top">
+						<view v-show="subject.showAnswer" class="margin-top solid-top" style="margin-top: 10upx;">
 							<view class="cu-bar">
 								<view class="action  text-white">
 									<text>正确答案：</text>
@@ -191,6 +191,7 @@
 		},
 		data() {
 			return {
+				isDisableAns: false,
 				curIntervalId: '',
 				curTimeoutId: '',
 				timecount: 15,
@@ -351,10 +352,12 @@
 					if (that.curTimeoutId) {
 						clearTimeout(that.curTimeoutId)
 					}
+					that.isDisableAns = true
 					that.curTimeoutId = setTimeout(function() {
+						that.isDisableAns = false
 						that.subjectIndex += 1;
 						that.autoTimesNext()
-					}, 500)
+					}, 1000)
 					
 				}
 			},
@@ -490,14 +493,26 @@
 		align-items: center;
 		position: absolute;
 		left: 200upx;
-		bottom: 150upx;
+		bottom: 120upx;
 	}
-	.text-line-2 {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		word-break: break-word;
-		-webkit-line-clamp: 2;
-		-webkit-box-orient: vertical;
-		display: -webkit-box;
-	}
+	 /* break-word; */
+	 .text-line-2 {
+	  /* /* overflow: hidden; */
+	  /* text-overflow: ellipsis;
+	  
+	  word-break: normal;
+	  -webkit-line-clamp: 5;
+	  -webkit-box-orient: vertical;
+	  display: -webkit-box */
+	  
+	
+	
+	  display: inline-block;
+	  white-space: pre-wrap;
+	  word-wrap: break-word;
+	  width: 650upx;
+	  height: auto;
+	  max-height: 180upx;
+	  overflow: hidden;
+	 }
 </style>
