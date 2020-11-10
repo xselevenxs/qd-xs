@@ -11,7 +11,7 @@
 		</view>
 		<view class="header" style="margin-top: 30upx;">
 			<view class="ticket">
-				<image src="/static/mddz2.png" style="width: 100%;height: 100%;"></image>
+				<image src="/static/mddz2.jpeg" style="width: 100%;height: 100%;"></image>
 			</view>
 		</view>
 	</view>

@@ -12,7 +12,7 @@
 		<view @click="convertClick" class="btn">兑换(消耗20积分)</view>
 		<view class="header" style="margin-top: 30upx;">
 			<view class="ticket">
-				<image mode="aspectFit" src="../../static/mddz2.png" style="width: 100%;height: 100%;"></image>
+				<image mode="aspectFit" src="../../static/mddz2.jpeg" style="width: 100%;height: 100%;"></image>
 			</view>
 		</view>
 		<!-- <view class="adress">
