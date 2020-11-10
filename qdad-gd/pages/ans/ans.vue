@@ -115,7 +115,7 @@
 							<view class="cu-bar">
 								<view class="action  text-white">
 									<text>正确答案：</text>
-									<text class="solid-bottom  padding-left text-white">{{subject.answer}}</text>
+									<text class="solid-bottom  padding-left text-white ">{{subject.answer}}</text>
 								</view>
 							</view>
 							<!-- <view class="cu-bar cu-bar-title">

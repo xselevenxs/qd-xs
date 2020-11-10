@@ -113,7 +113,7 @@
 			
 		},
 		onShow() {
-			if(that.userInfo.integral > 20){
+			if(that.userInfo.integral >= 20){
 				this.btnDisabled = '';
 			}else{
 				this.btnDisabled = 'disabled';
