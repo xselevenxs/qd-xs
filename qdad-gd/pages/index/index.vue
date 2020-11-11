@@ -65,8 +65,8 @@
 		onShow() {
 			if(that.token){
 				that.getUserInfo()
-			}
-			// that.getMobileLogin()
+			} 
+			//that.getMobileLogin()
 		},
 		methods: {
 			toSelectAdress(){

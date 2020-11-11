@@ -372,7 +372,8 @@
 						that.timecount--
 						if (that.timecount == 0) {
 							if(that.subjectIndex == 9){//最后一题
-								that.answerToService()
+								//that.answerToService()
+								that.lastt()
 							}else{
 								that.MoveSubject(1)
 							}
@@ -423,6 +424,12 @@
 					
 				})
 			},
+			lastt(){
+			    that.isDisableAns = true
+			    if (that.curIntervalId) {
+			     clearInterval(that.curIntervalId)
+			    }
+			   },
 			AppointedSubject: function(e) { //题卡指定
 
 				this.modalCard = null;
