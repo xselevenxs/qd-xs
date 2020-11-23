@@ -3,43 +3,31 @@
 		<slot />
 		<view v-if="mode === 'default'" :style="{'bottom':dots.bottom + 'px'}" class="uni-swiper__dots-box" key='default'>
 			<view v-for="(item,index) in info" :style="{
-        'width': (index === current? dots.width*2:dots.width ) + 'px','height':dots.width/3 +'px' ,'background-color':index !== current?dots.backgroundColor:dots.selectedBackgroundColor,'border-radius':'0px'}" :key="index" class="uni-swiper__dots-item uni-swiper__dots-bar" />
+        'width': (index === current? dots.width*2:dots.width ) + 'px','height':dots.width/3 +'px' ,'background-color':index !== current?dots.backgroundColor:dots.selectedBackgroundColor,'border-radius':'0px'}"
+			 :key="index" class="uni-swiper__dots-item uni-swiper__dots-bar" />
 		</view>
 		<view v-if="mode === 'dot'" :style="{'bottom':dots.bottom + 'px'}" class="uni-swiper__dots-box" key='dot'>
 			<view v-for="(item,index) in info" :style="{
-        'width': dots.width + 'px','height':dots.height +'px' ,'background-color':index !== current?dots.backgroundColor:dots.selectedBackgroundColor,'border':index !==current ? dots.border:dots.selectedBorder}" :key="index" class="uni-swiper__dots-item" />
+        'width': dots.width + 'px','height':dots.height +'px' ,'background-color':index !== current?dots.backgroundColor:dots.selectedBackgroundColor,'border':index !==current ? dots.border:dots.selectedBorder}"
+			 :key="index" class="uni-swiper__dots-item" />
 		</view>
 		<view v-if="mode === 'round'" :style="{'bottom':dots.bottom + 'px'}" class="uni-swiper__dots-box" key='round'>
 			<view v-for="(item,index) in info" :class="[index === current&&'uni-swiper__dots-long']" :style="{
-		    'width':(index === current? dots.width*3:dots.width ) + 'px','height':dots.height +'px' ,'background-color':index !== current?dots.backgroundColor:dots.selectedBackgroundColor,'border':index !==current ? dots.border:dots.selectedBorder}" :key="index" class="uni-swiper__dots-item " />
+		    'width':(index === current? dots.width*3:dots.width ) + 'px','height':dots.height +'px' ,'background-color':index !== current?dots.backgroundColor:dots.selectedBackgroundColor,'border':index !==current ? dots.border:dots.selectedBorder}"
+			 :key="index" class="uni-swiper__dots-item " />
 		</view>
 		<view v-if="mode === 'nav'" key='nav' :style="{'background-color':dotsStyles.backgroundColor,'bottom':'0'}" class="uni-swiper__dots-box uni-swiper__dots-nav">
 			<text :style="{'color':dotsStyles.color}" class="uni-swiper__dots-nav-item">{{ (current+1)+"/"+info.length +' ' +info[current][field] }}</text>
 		</view>
 		<view v-if="mode === 'indexes'" key='indexes' :style="{'bottom':dots.bottom + 'px'}" class="uni-swiper__dots-box">
 			<view v-for="(item,index) in info" :style="{
-        'width':dots.width + 'px','height':dots.height +'px' ,'color':index === current?dots.selectedColor:dots.color,'background-color':index !== current?dots.backgroundColor:dots.selectedBackgroundColor,'border':index !==current ? dots.border:dots.selectedBorder}" :key="index" class="uni-swiper__dots-item uni-swiper__dots-indexes"><text class="uni-swiper__dots-indexes-text">{{ index+1 }}</text></view>
+        'width':dots.width + 'px','height':dots.height +'px' ,'color':index === current?dots.selectedColor:dots.color,'background-color':index !== current?dots.backgroundColor:dots.selectedBackgroundColor,'border':index !==current ? dots.border:dots.selectedBorder}"
+			 :key="index" class="uni-swiper__dots-item uni-swiper__dots-indexes"><text class="uni-swiper__dots-indexes-text">{{ index+1 }}</text></view>
 		</view>
 	</view>
 </template>
 
 <script>
-	/**
-	 * SwiperDod 轮播图指示点
-	 * @description 自定义轮播图指示点
-	 * @tutorial https://ext.dcloud.net.cn/plugin?id=284
-	 * @property {Number} current 当前指示点索引，必须是通过 `swiper` 的 `change` 事件获取到的 `e.detail.current`
-	 * @property {String} mode = [default|round|nav|indexes] 指示点的类型
-	 * 	@value defualt 默认指示点
-	 * 	@value round 圆形指示点
-	 * 	@value nav 条形指示点
-	 * 	@value indexes 索引指示点
-	 * @property {String} field mode 为 nav 时，显示的内容字段（mode = nav 时必填）
-	 * @property {String} info 轮播图的数据，通过数组长度决定指示点个数
-	 * @property {Object} dotsStyles 指示点样式
-	 * @event {Function} clickItem 组件触发点击事件时触发，e={currentIndex}
-	 */
-
 	export default {
 		name: 'UniSwiperDot',
 		props: {
@@ -109,7 +97,7 @@
 	}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 	.uni-swiper__warp {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -138,11 +126,10 @@
 		width: 8px;
 		border-radius: 100px;
 		margin-left: 6px;
-		background-color: rgba(0, 0, 0, 0.4);
-		/* transition: width 0.2s linear;  不要取消注释，不然会不能变色
- */
+		background-color: $uni-bg-color-mask;
+		// transition: width 0.2s linear;  不要取消注释，不然会不能变色
 	}
-
+	
 	.uni-swiper__dots-item:first-child {
 		margin: 0;
 	}
@@ -176,7 +163,7 @@
 		/* overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap; */
-		font-size: 14px;
+		font-size: $uni-font-size-base;
 		color: #fff;
 		margin: 0 15px;
 	}
@@ -185,14 +172,13 @@
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
-		/* flex: 1;
- */
+		// flex: 1;
 		justify-content: center;
 		align-items: center;
 	}
 
 	.uni-swiper__dots-indexes-text {
 		color: #fff;
-		font-size: 12px;
+		font-size: $uni-font-size-sm;
 	}
 </style>
