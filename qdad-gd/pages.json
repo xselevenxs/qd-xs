@@ -1,71 +1,77 @@
 {
 	"pages": [{
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText": "青岛市垃圾分类知识竞赛"
-		}
-	}, {
-		"path": "pages/activity/draw",
-		"style": {
-			"navigationBarTitleText": "抽奖"
-		}
-	}, {
-		"path": "pages/submitInfo/submitInfo",
-		"style": {
-			"navigationBarTitleText": "提交",
-			"enablePullDownRefresh": false
+			"path": "pages/voteIndex/voteIndex",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "青岛市垃圾分类知识竞赛"
+			}
+		}, {
+			"path": "pages/activity/draw",
+			"style": {
+				"navigationBarTitleText": "抽奖"
+			}
+		}, {
+			"path": "pages/submitInfo/submitInfo",
+			"style": {
+				"navigationBarTitleText": "提交",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/convert/convert",
+			"style": {
+				"navigationBarTitleText": "兑换",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/ans/ans",
+			"style": {
+				"navigationBarTitleText": "答题",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/myAwardList/myAwardList",
+			"style": {
+				"navigationBarTitleText": "我的奖品",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/virtualGoodsDetail/virtualGoodsDetail",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/selectAdress/selectAdress",
+			"style": {
+				"navigationBarTitleText": "街道选择",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/rule/rule",
+			"style": {
+				"navigationBarTitleText": "活动规则",
+				"enablePullDownRefresh": false
+			}
+
 		}
 
-	}    ,{
-            "path" : "pages/convert/convert",
+	    ,{
+            "path" : "pages/activity-vote/activity-vote",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "兑换",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/ans/ans",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "答题",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/myAwardList/myAwardList",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "我的奖品",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/virtualGoodsDetail/virtualGoodsDetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "详情",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/selectAdress/selectAdress",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "街道选择",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/rule/rule",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "活动规则",
+                "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
             
