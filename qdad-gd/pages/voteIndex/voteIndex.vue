@@ -16,16 +16,42 @@
 </template>
 
 <script>
+	var that
 	export default {
 		data() {
 			return {
 
 			}
 		},
+		onLoad() {
+				that = this
+		},
+		onShow() {
+			that.getMobileLogin()
+		},
 		methods: {
 			toActivity(){
 				uni.navigateTo({
 					url: '../activity-vote/activity-vote'
+				})
+			},
+			getMobileLogin(){
+				that.$api.getMobileLogin({
+					mobile: '13011112222'
+				}).then((res) => {
+					let resData = res.data
+					if(resData.state_code == '400200'){
+						uni.setStorage({
+							key: "nativeTokenInfo_key",
+							data: resData.data.access_token,
+						})
+						that.$store.commit('setToken',resData.data.access_token)
+					}else{
+						that.showToast(resData.state_msg)
+					}
+				
+				}).catch((err) => {
+					
 				})
 			}
 		}

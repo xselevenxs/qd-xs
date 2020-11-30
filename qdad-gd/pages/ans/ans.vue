@@ -115,7 +115,7 @@
 							<view class="cu-bar">
 								<view class="action  text-white">
 									<text>正确答案：</text>
-									<text class="solid-bottom  padding-left text-white ">{{subject.answer}}</text>
+									<text class="solid-bottom  padding-left text-white" style="font-size: 40upx;font-weight: 500;">{{subject.answer}}</text>
 								</view>
 							</view>
 							<!-- <view class="cu-bar cu-bar-title">
@@ -370,7 +370,7 @@
 					that.timecount = 15
 					that.curIntervalId = setInterval(function() {
 						that.timecount--
-						if (that.timecount == 0) {
+						if (that.timecount == 1) {
 							if(that.subjectIndex == 9){//最后一题
 								//that.answerToService()
 								that.lastt()

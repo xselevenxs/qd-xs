@@ -4,7 +4,7 @@
 		onLaunch: function() {
 			console.log('App Launch');
 			that = this
-			// return
+			return
 			//  临时修改为默认的token  <<<<
 			var myAppId = that.$store.state.myAppId
 			var myWeiXinHttp = that.$store.state.myWeiXinHttp

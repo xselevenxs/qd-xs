@@ -71,8 +71,9 @@
             "path" : "pages/activity-vote/activity-vote",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "navigationBarTitleText": "投票",
+                "enablePullDownRefresh": true,
+				"onReachBottomDistance": 50
             }
             
         }

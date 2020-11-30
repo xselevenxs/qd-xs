@@ -47,18 +47,19 @@
             "urlCheck" : true
         }
     },
+	// wctest
     "h5" : {
         "devServer" : {
             "disableHostCheck" : true,
             "port" : 8083,
             "https" : false,
             "proxy" : {
-                "/wctest" : {
-                    "target" : "http://wctest.lanbenzi.cn:8001/dati",
+                "/vote" : {
+                    "target" : "http://182.92.91.60:8011",
                     "changeOrigin" : true,
                     "secure" : false,
                     "pathRewrite" : {
-                        "^/wctest" : ""
+                        "^/vote" : ""
                     }
                 }
             }

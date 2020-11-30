@@ -213,6 +213,21 @@ export const getAddOrUpdateUser = (data) => {
 		data,
 	})
 }
+//作品列表
+export const getVoteDesignList = (data) => {
+
+	//设置请求结束后拦截器
+	http.interceptor.response = (response) => {
+
+		//判断返回状态 执行相应操作
+		return response;
+	}
+	return http.request({
+		url: '/design/list',
+		dataType: 'json',
+		data,
+	})
+}
 // 轮播图   
 export const banner = (data) => {
 	return http.request({
@@ -239,5 +254,6 @@ export default {
 	getAwardById,
 	getAreaDate,
 	getAddOrUpdateUser,
+	getVoteDesignList,
 	banner
 }
