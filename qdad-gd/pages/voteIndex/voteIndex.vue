@@ -3,7 +3,7 @@
 		<view class="allback">
 			<view class="top">
 				<view class="imageView">
-					<image class="aniImage" mode="aspectFit" src="../../static/mybjtin.png"></image>
+					<image class="aniImage" mode="aspectFit" src="../../static/startans.png"></image>
 				</view>
 			</view>
 			<view class="bottom">
@@ -100,12 +100,12 @@
 	}
 	@keyframes mymove{
 		from{
-			/* top: 0upx; */
+			top: 0upx;
 			width: 300upx;
 			height: 150upx;
 		}
 		to{
-			/* top: 100upx; */
+			top: 100upx;
 			width: 500upx;
 			height: 250upx;
 		}

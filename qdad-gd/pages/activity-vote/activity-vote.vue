@@ -53,6 +53,11 @@
 				</view>
 			</view>
 		</view>
+
+		<view style="width: 100%;height: 100upx;"></view>
+		<view style="width: 100%;height: 100upx;">
+			<view @click="voteClick" class="voteBtn">投票</view>
+		</view>
 		<!-- <view style="width: 100%;height: 60upx;background: #F3F3F3;display: flex;align-items: center;justify-content: center;position: fixed;bottom: 55px;"
 		 class="textNormalSize" v-if="isBottomLoading">
 			<image src="/static/loading.gif" style="width: 40upx;height: 40upx;margin-right: 20upx;"></image>
@@ -65,7 +70,7 @@
 	import uniSection from '@/components/uni-section/uni-section.vue'
 	import uniSwiperDot from '@/components/uni-swiper-dot/uni-swiper-dot.vue'
 	import no_data from "../../components/no-data.vue"
-	
+
 	var page = 1;
 	var size = 10;
 	var isPermitLoadMore = true;
@@ -132,7 +137,7 @@
 			that.getFirstData(true);
 		},
 		onShow() {
-			
+
 		},
 		onUnload() {
 			page = 1;
@@ -157,106 +162,133 @@
 			}
 		},
 		methods: {
-			selectItem(item){
-				for (let i=0;i<that.list.length;i++) {
+			
+			voteClick() {
+				var voteId = ''
+				for (let i = 0; i < that.list.length; i++) {
 					let row = that.list[i]
-					if(row.id == item.id){
-						that.list[i].checked = true
-					}else{
-						that.list[i].checked = false
+					if (row.checked && row.checked == true) {
+						voteId = row.id
 					}
 				}
-			},
-			change(e) {
-				this.current = e.detail.current
-			},
-			noClick: function(res) {
-				if (isTabChangePermit) {
-					that.noColor = "#0077DD";
-					that.okColor = "#6f6f6f";
-					that.noLine = "#0077DD";
-					that.okLine = "#FFFFFF";
-					page = 1;
-					isPermitLoadMore = true;
-					that.list = [];
-					that.typeFlag = 1;
-					that.getFirstData(false);
-					that.isLogo = true
-					isTabChangePermit = false
+				if (voteId.length == 0) {
+					that.showToast('请先选择作品')
+					return
 				}
-
-			},
-			okClick: function(res) {
-				if (isTabChangePermit) {
-					that.noColor = "#6f6f6f";
-					that.okColor = "#0077DD";
-					that.noLine = "#FFFFFF";
-					that.okLine = "#0077DD";
-					page = 1;
-					isPermitLoadMore = true;
-					that.list = [];
-					that.typeFlag = 2;
-					that.getFirstData(false);
-					that.isLogo = false
-					isTabChangePermit = false
-				}
-			},
-			imageShow(res) {
-				uni.previewImage({
-					urls: [res],
-				});
-			},
-			getFirstData(isRefresh) {
-				that.isNoDataShow = false;
-				that.$api.getVoteDesignList({
-					pageNo: page,
-					pageSize: size,
-					type: that.typeFlag
+				that.$api.getVoteDetailVoteDesign({
+					id: voteId
 				}).then((res) => {
-					isTabChangePermit = true
-					var data = res.data;
-					if (data.state_code == 400200) {
-						if (data.data) {
-							var oldArray = that.list;
-							var newArray = data.data;
-							if (newArray.length > 0) {
-								that.list = oldArray.concat(newArray);
-								if (newArray.length != size) {
-									isPermitLoadMore = false;
-								}
-							} else {
-								page--;
+					let resData = res.data
+					if(resData.state_code == '400200'){
+						that.showToast('投票成功')
+					} else {
+						that.showToast(resData.state_msg)
+					}
+
+				}).catch((err) => {
+
+			})
+		},
+		selectItem(item) {
+			for (let i = 0; i < that.list.length; i++) {
+				let row = that.list[i]
+				if (row.id == item.id) {
+					that.list[i].checked = true
+				} else {
+					that.list[i].checked = false
+				}
+			}
+		},
+		change(e) {
+			this.current = e.detail.current
+		},
+		noClick: function(res) {
+			if (isTabChangePermit) {
+				that.noColor = "#0077DD";
+				that.okColor = "#6f6f6f";
+				that.noLine = "#0077DD";
+				that.okLine = "#FFFFFF";
+				page = 1;
+				isPermitLoadMore = true;
+				that.list = [];
+				that.typeFlag = 1;
+				that.getFirstData(false);
+				that.isLogo = true
+				isTabChangePermit = false
+			}
+
+		},
+		okClick: function(res) {
+			if (isTabChangePermit) {
+				that.noColor = "#6f6f6f";
+				that.okColor = "#0077DD";
+				that.noLine = "#FFFFFF";
+				that.okLine = "#0077DD";
+				page = 1;
+				isPermitLoadMore = true;
+				that.list = [];
+				that.typeFlag = 2;
+				that.getFirstData(false);
+				that.isLogo = false
+				isTabChangePermit = false
+			}
+		},
+		imageShow(res) {
+			uni.previewImage({
+				urls: [res],
+			});
+		},
+		getFirstData(isRefresh) {
+			that.isNoDataShow = false;
+			that.$api.getVoteDesignList({
+				pageNo: page,
+				pageSize: size,
+				type: that.typeFlag
+			}).then((res) => {
+				isTabChangePermit = true
+				var data = res.data;
+				if (data.state_code == 400200) {
+					if (data.data) {
+						var oldArray = that.list;
+						var newArray = data.data;
+						if (newArray.length > 0) {
+							that.list = oldArray.concat(newArray);
+							if (newArray.length != size) {
 								isPermitLoadMore = false;
-								//that.showToast("没有数据了！")
 							}
 						} else {
 							page--;
 							isPermitLoadMore = false;
+							//that.showToast("没有数据了！")
 						}
-
 					} else {
 						page--;
 						isPermitLoadMore = false;
-						that.showToast(data.message)
 					}
+
+				} else {
+					page--;
+					isPermitLoadMore = false;
+					that.showToast(data.message)
+				}
+				that.isNoDataShow = true;
+				if (page > 1) {
+					that.isNoDataShow = false;
+				}
+				that.isBottomLoading = false;
+				uni.stopPullDownRefresh();
+			}).catch((err) => {
+				if (page == 1) {
 					that.isNoDataShow = true;
-					if (page > 1) {
-						that.isNoDataShow = false;
-					}
-					that.isBottomLoading = false;
-					uni.stopPullDownRefresh();
-				}).catch((err) => {
-					if (page == 1) {
-						that.isNoDataShow = true;
-						that.list = [];
-					}
-					isTabChangePermit = true
-					that.isBottomLoading = false;
-					uni.stopPullDownRefresh();
-					that.showToast("查询出错啦，请稍后重试！")
-				})
-			}
+					that.list = [];
+				}
+				isTabChangePermit = true
+				that.isBottomLoading = false;
+				uni.stopPullDownRefresh();
+				that.showToast("查询出错啦，请稍后重试！")
+			})
 		}
+	}
 	}
 </script>
 
@@ -452,19 +484,22 @@
 		padding: 15upx 15upx;
 		position: relative;
 	}
+
 	.itemTop {
 		width: 100%;
 		height: 50upx;
 		/* background-color: #09BB07; */
 		position: relative;
 	}
-	.select{
+
+	.select {
 		width: 40upx;
 		height: 40upx;
 		position: absolute;
 		top: 2upx;
 		right: 2upx;
 	}
+
 	.itemBottom {
 		display: flex;
 		flex-direction: row;
@@ -472,5 +507,20 @@
 		align-items: center;
 		width: 100%;
 		height: 50upx;
+	}
+
+	.voteBtn {
+		width: 550upx;
+		height: 60upx;
+		margin: 0 auto;
+		text-align: center;
+		line-height: 60upx;
+		border-radius: 10upx;
+		font-size: 30upx;
+		position: fixed;
+		bottom: 20upx;
+		left: 100upx;
+		z-index: 999;
+		background-color: rgba(200, 200, 200, 0.6);
 	}
 </style>
