@@ -21,10 +21,23 @@
 				<view style="width:50%;height: 1upx;display: inline-block;" v-bind:style="{background:okLine}"></view>
 			</view>
 		</view>
-		<view  class="listView">
-			<view v-for="(item,index) in list" :key="index" class="radius shadow bg-white" style="width: 47%;height: 250upx;margin: 10upx;" @click="itemClick(item)">
-				<view class="listItem" >
-					<image :src="item.icon" mode="aspectFit" style="width: 100%;height: 150upx;"></image>
+		<view v-if="isLogo" class="listView">
+			<view v-for="(item,index) in list" :key="index" class="radius shadow bg-white" style="width: 47%;height: 250upx;margin: 10upx;">
+				<view class="listItem">
+					<image v-if="item.checked" class="select" src="/static/selected-dh.png"></image>
+					<image v-else class="select" src="/static/noselect-dh.png"></image>
+					<image :src="item.icon" mode="aspectFit" style="width: 100%;height: 150upx;" @click="imageShow(item.icon)"></image>
+					<view class="itemBottom">
+						<view>{{item.name}}</view>
+						<view>{{item.count}}票</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view v-else class="listView">
+			<view v-for="(item,index) in list" :key="index" class="radius shadow bg-white" style="width: 47%;height: 250upx;margin: 10upx;">
+				<view class="listItem">
+					<image :src="item.icon" mode="aspectFit" style="width: 100%;height: 150upx;" @click="imageShow(item.icon)"></image>
 					<view class="itemBottom">
 						<view>{{item.name}}</view>
 						<view>{{item.count}}票</view>
@@ -62,8 +75,7 @@
 						content: '内容 C'
 					}
 				],
-				modeIndex: -1,
-				styleIndex: -1,
+				isLogo: true,
 				current: 0,
 				mode: 'dot',
 				dotsStyles: {
@@ -81,22 +93,26 @@
 					id: '1',
 					icon: '/static/baoyang-s.png',
 					name: '1111',
-					count: '8'
-				},{
+					count: '8',
+					checked: true
+				}, {
 					id: '2',
 					icon: '/static/car.jpeg',
 					name: '1111',
-					count: '7'
-				},{
+					count: '7',
+					checked: true
+				}, {
 					id: '3',
 					icon: '/static/cbd.jpg',
 					name: '1111',
-					count: '9'
-				},{
+					count: '9',
+					checked: true
+				}, {
 					id: '4',
 					icon: '/static/diqiu.png',
 					name: '1111',
-					count: '123'
+					count: '123',
+					checked: true
 				}]
 			}
 		},
@@ -117,9 +133,10 @@
 					// isPermitLoadMore = true;
 					// that.list = [];
 					// that.getFirstData(false);
+					that.isLogo = true
 					isTabChangePermit = false
 				}
-			
+
 			},
 			okClick: function(res) {
 				if (isTabChangePermit) {
@@ -132,9 +149,15 @@
 					// isPermitLoadMore = true;
 					// that.list = [];
 					// that.getFirstData(false);
+					that.isLogo = false
 					isTabChangePermit = false
 				}
 			},
+			imageShow(res) {
+				uni.previewImage({
+					urls: [res],
+				});
+			}
 		}
 	}
 </script>
@@ -312,6 +335,7 @@
 		border-color: #007aff;
 		border-width: 1px;
 	}
+
 	.listView {
 		display: flex;
 		flex-wrap: wrap;
@@ -319,15 +343,23 @@
 		background-color: #f3f3f3;
 		width: 100%;
 	}
+
 	.listItem {
 		display: flex;
 		flex-direction: column;
-		align-items: center; 
+		align-items: center;
 		justify-content: space-between;
 		width: 100%;
 		height: 100%;
 		padding: 15upx 15upx;
 		position: relative;
+	}
+	.select{
+		width: 40upx;
+		height: 40upx;
+		position: absolute;
+		top: 2upx;
+		right: 2upx;
 	}
 	.itemBottom {
 		display: flex;
