@@ -10,11 +10,17 @@
 			</swiper>
 		</uni-swiper-dot>
 		<view style="display: flex;flex-direction: column; align-items: center;justify-content: space-around;width: 100%;">
-			<view style="width: 100%;height: 80upx;display: flex;flex-direction: row;" class="primaryBlackText">
+			<view class="primaryBlackText" style="width: 100%;height: 100upx;display: flex;flex-direction: row;font-weight: 600;font-size: 30upx;" >
 				<view style="width: 50%;height: 100%;display: flex;align-items: center;justify-content: center;" v-bind:style="{color:noColor}"
-				 @click="noClick">logo</view>
+				 @click="noClick">
+					<image src="../../static/logo-icon.png" style="width: 64upx;height: 64upx;margin-right: 15upx;"></image>
+					<view>logo</view>
+				 </view>
 				<view style="width: 50%;height: 100%;display: flex;align-items: center;justify-content: center;" v-bind:style="{color:okColor}"
-				 @click="okClick">吉祥物</view>
+				 @click="okClick">
+				 <image src="../../static/mascot-icon.png" style="width: 64upx;height: 64upx;margin-right: 15upx;"></image>
+				 <view>吉祥物</view>
+				 </view>
 			</view>
 			<view style="width: 100%;display: flex;flex-direction: row;">
 				<view style="width:50%;height: 1upx;display: inline-block;" v-bind:style="{background:noLine}"></view>
@@ -32,7 +38,8 @@
 					<image :src="item.infoA" mode="aspectFit" style="width: 100%;height: 150upx;" @click="imageShow(item.infoA)"></image>
 					<view class="itemBottom">
 						<view>{{item.name}}</view>
-						<view>{{item.num}}票</view>
+						<view v-if="item.num" style="color: #00B26A;">{{item.numV}}票</view>
+						<view v-else style="color: #00B26A;">0票</view>
 					</view>
 				</view>
 			</view>
@@ -48,7 +55,8 @@
 					<image :src="item.infoA" mode="aspectFit" style="width: 100%;height: 150upx;" @click="imageShow(item.infoA)"></image>
 					<view class="itemBottom">
 						<view>{{item.name}}</view>
-						<view>{{item.num}}票</view>
+						<view v-if="item.num" style="color: #00B26A;">{{item.numV}}票</view>
+						<view v-else style="color: #00B26A;">0票</view>
 					</view>
 				</view>
 			</view>
